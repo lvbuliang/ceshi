@@ -1,0 +1,130 @@
+.avatar-uploader ::v-deep.el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+}
+.avatar-uploader {
+    height: 100px;
+}
+
+.avatar-uploader ::v-deep.el-upload:hover {
+    border-color: #409eff;
+}
+
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #007AFF;
+    text-align: center;
+    margin-bottom: 10px;
+    height: auto;
+    line-height: auto;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: contain;
+}
+
+.uploadAva {
+    display: flex;
+    flex-direction: column;
+    color: #007AFF;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 12px;
+    span {
+        line-height: 16px;
+    }
+}
+::v-deep .border_com {
+    .el-form-item__content {
+        border: 1px solid #D1E1EC;
+        border-radius: 16px;
+        .el-radio-group {
+            margin-left: 12px;
+        }
+    }
+}
+.upload-middle {
+    .el-button {
+        padding: 11px 15px;
+        ::v-deep span {
+            display: flex;
+            align-items: center;
+            .uploadImg_before {
+                font-size: 20px;
+                margin-right: 8px;
+            }
+        }
+    }
+}
+.minHeight {
+    ::v-deep textarea {
+        min-height: 117px!important;
+    }
+}
+.upload-middle {
+    .el-button {
+        padding: 5px 13px;
+        ::v-deep span {
+            display: flex;
+            align-items: center;
+            font-size:14px;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:rgba(0,0,0,0.65);
+            line-height:22px;
+            .uploadImg_before {
+                font-size: 14px;
+                margin-right: 9px;
+            }
+        }
+    }
+}
+.uploader_class {
+    display: inline-block;
+    margin-right: 14px;
+}
+.upload_list {
+    .list_item {
+        width: 440px;
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        height: 36px;
+        background: rgba(230, 247, 255, 1);
+        border-radius: 2px;
+        border: 1px solid rgba(212, 240, 255, 1);
+        padding: 0 16px 0 12px;
+        .upload_title {
+            flex-grow: 1;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 14px;
+            color: rgba(51, 51, 51, 1);
+            margin: 0 8px;
+            line-height: 36px;
+        }
+        .iconquchu_shanchu {
+            font-size: 18px;
+            color: #007AFF;
+            cursor: pointer;
+        }
+        .uploader_class {
+            cursor: pointer;
+        }
+        &:hover {
+            border: 1px solid #007AFF;
+        }
+    }
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="376px" height="336px" viewBox="0 0 376 336" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>编组 15</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M28,58 L348,58 C353.522847,58 358,62.4771525 358,68 L358,267 C358,272.522847 353.522847,277 348,277 L28,277 C22.4771525,277 18,272.522847 18,267 L18,68 C18,62.4771525 22.4771525,58 28,58 Z" id="path-1"></path>
+        <filter x="-7.9%" y="-12.3%" width="115.9%" height="124.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="9" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.407843137   0 0 0 0 0.745098039  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M48,38 L328,38 C333.522847,38 338,42.4771525 338,48 L338,287 C338,292.522847 333.522847,297 328,297 L48,297 C42.4771525,297 38,292.522847 38,287 L38,48 C38,42.4771525 42.4771525,38 48,38 Z" id="path-3"></path>
+        <filter x="-9.0%" y="-10.4%" width="118.0%" height="120.8%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="9" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.407843137   0 0 0 0 0.745098039  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M10,0 L200,0 L260,56.8333333 L260,290 C260,295.522847 255.522847,300 250,300 L10,300 C4.4771525,300 6.76353751e-16,295.522847 0,290 L0,10 C-6.76353751e-16,4.4771525 4.4771525,1.01453063e-15 10,0 Z" id="path-5"></path>
+        <filter x="-10.4%" y="-9.0%" width="120.8%" height="118.0%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="9" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.407843137   0 0 0 0 0.745098039  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M0,253 L260,253 L260,290 C260,295.522847 255.522847,300 250,300 L10,300 C4.4771525,300 6.76353751e-16,295.522847 0,290 L0,253 Z" id="path-7"></path>
+        <filter x="-10.4%" y="-57.4%" width="120.8%" height="214.9%" filterUnits="objectBoundingBox" id="filter-8">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="9" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.407843137   0 0 0 0 0.745098039  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M200,0 L260,56.8333333 L210,56.8333333 C204.477153,56.8333333 200,52.3561808 200,46.8333333 L200,0 Z" id="path-9"></path>
+        <filter x="-45.0%" y="-47.5%" width="190.0%" height="195.0%" filterUnits="objectBoundingBox" id="filter-10">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="9" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.407843137   0 0 0 0 0.745098039  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="项目申报_年度计划管理详情页_联合会商" transform="translate(-572.000000, -330.000000)">
+            <g id="编组-14" transform="translate(530.000000, 230.000000)">
+                <g id="编组-15" transform="translate(42.000000, 100.000000)">
+                    <g id="矩形">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#B6DEFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="矩形">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        <use fill="#D3ECFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    </g>
+                    <g id="编组-9" transform="translate(58.000000, 18.000000)">
+                        <g id="蒙版">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-5"></use>
+                        </g>
+                        <g id="蒙版">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7"></use>
+                            <use fill="#0090FF" fill-rule="evenodd" xlink:href="#path-7"></use>
+                        </g>
+                        <g id="矩形">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-10)" xlink:href="#path-9"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-9"></use>
+                        </g>
+                        <g id="政府" transform="translate(75.000000, 40.000000)">
+                            <circle id="椭圆形" stroke-opacity="0.612734921" stroke="#0092FF" stroke-width="4" fill="#FFFFFF" cx="55" cy="55" r="57"></circle>
+                            <g id="市政工程-规划管理科" transform="translate(21.000000, 23.000000)" fill="#0090FF" fill-rule="nonzero">
+                                <path d="M61.9139779,0.0209388814 L61.9139778,0.0209388921 C62.7025876,-0.108837354 63.4470855,0.4252528 63.5768611,1.21386319 C63.5896756,1.29173297 63.5960988,1.37052018 63.5960665,1.44943727 L63.5960665,20.1943907 L63.5960695,20.1943915 C64.9090971,20.5460411 66.2035241,20.9637953 67.4743945,21.4460623 C66.038918,21.6135732 64.7523412,21.7601455 63.5937177,21.8881058 L63.5937177,21.80435 L63.5937177,57.1910621 L63.5937177,57.1909633 C63.5932382,57.9927511 62.9428724,58.6423354 62.1410846,58.6418562 C61.9505877,58.6417423 61.7619748,58.604138 61.5859997,58.5311869 L48.4782337,53.0707874 L48.4782337,53.0707874 C47.9372878,52.8440395 47.5851515,52.3149211 47.5848425,51.7283708 L47.5848425,23.7609753 L47.7477008,23.7121178 C38.2833244,25.1941274 28.4978823,29.3819037 28.6304827,38.3507468 L28.6467684,38.788137 C29.214445,50.1486422 57.7518287,64.2405389 66.9277378,64.540671 L67.1999431,64.540671 C62.6631813,64.5895285 39.1767456,64.540671 10.2345512,64.540671 L2.39637387,64.540671 L2.39637387,64.540671 C2.16638313,64.5410808 1.96575174,64.3846074 1.91012641,64.1614446 C0.114037437,57.1027281 -2.54287586,42.3477664 5.43251104,31.2361943 C13.1915569,20.9644877 31.5759104,17.3234942 47.5824735,17.9306942 L47.5824735,17.9516331 L47.5824735,3.58986973 L47.5824734,3.58990784 C47.582719,2.87890998 48.0994315,2.27341864 48.8015458,2.16137983 L61.9139779,0.0209388814 Z M43.0945543,29.5285293 L43.0945543,47.3986858 L43.0945543,47.3987024 C43.0971642,48.1979176 42.4513935,48.8479244 41.6521845,48.8505551 C41.4001851,48.8513728 41.1523378,48.7863771 40.9331726,48.6619938 L40.7866003,48.5666054 L35.2308143,44.4905022 L35.2308144,44.4905023 C34.9110759,44.261497 34.7005017,43.9102592 34.6491785,43.5203315 L34.6352192,43.3225753 L34.6352192,32.3017364 L34.6352192,32.3017841 C34.6355617,31.8057887 34.8891013,31.3442933 35.307553,31.0780017 L35.4704112,30.9895933 L41.0261973,28.379213 L41.0261974,28.379213 C41.7497554,28.0337767 42.6163427,28.3403052 42.9617847,29.063861 C43.0316714,29.2102467 43.0765298,29.3673097 43.0945543,29.5285236 L43.0945543,29.5285293 Z M41.698623,3.67832621 L41.6986229,3.67832621 C42.4120798,3.70105384 43.0035419,4.23829646 43.0945462,4.94628984 L43.1061815,5.12776007 L43.1061815,13.7941381 L43.1061815,13.7941406 C43.1076433,14.58171 42.4790119,15.2258528 41.6916361,15.243577 L41.5241252,15.243577 L35.9683391,14.7270843 L35.968339,14.7270843 C35.286169,14.6650129 34.7401997,14.1345623 34.6584861,13.4544674 L34.6584861,6.24915264 L34.6584861,6.24913786 C34.6562487,5.62294056 35.0557728,5.06586697 35.6496189,4.86718077 L35.8124771,4.82297648 L41.3682632,3.69227915 L41.368263,3.69227918 C41.4776435,3.66953099 41.5892687,3.65938319 41.7009582,3.66203406 L41.698623,3.67832621 Z" id="形状"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

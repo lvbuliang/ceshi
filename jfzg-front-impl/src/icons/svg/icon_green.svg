@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title></title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="8" cy="8" r="8"></circle>
+        <filter x="-40.6%" y="-40.6%" width="181.2%" height="181.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.278431373   0 0 0 0 0.847058824   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="0" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.项目实施_质量检查_质量检查列表" transform="translate(-988.000000, -527.000000)">
+            <g id="编组-11" transform="translate(520.000000, 414.000000)">
+                <g id="编组-5">
+                    <g id="编组-18" transform="translate(0.000000, 96.000000)">
+                        <g id="灯" transform="translate(472.000000, 21.000000)">
+                            <g id="椭圆形">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                <use stroke="#FFFFFF" stroke-width="1" fill="#D6FFC1" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            </g>
+                            <path d="M9.5111305,12.6222301 C9.5111305,12.9777864 9.24445276,13.0666746 9.0666746,13.0666746 L6.93334052,13.0666746 C6.5777842,13.0666746 6.48889608,12.8000083 6.48889608,12.6222301 L6.48889608,12.1777857 L9.5111305,12.1777857 L9.5111305,12.6222301 Z M9.95556348,9.42221946 L9.95556348,10.5777765 C9.95556348,10.9333328 9.6888972,11.022221 9.51111904,11.022221 L6.40000604,11.022221 C6.04444973,11.022221 5.9555616,10.7555547 5.9555616,10.5777765 L5.9555616,9.42221946 C4.97778269,8.79999686 4.44444821,7.73332791 4.44444821,6.48888271 C4.44444821,4.53332488 6.04444973,2.93331954 8.00001138,2.93331954 C9.95556921,2.93331954 11.5555745,4.53332106 11.5555745,6.48888271 C11.5555745,7.64443978 10.9333519,8.79999304 9.95557303,9.42221946 Z" id="形状结合" fill="#47D800"></path>
+                            <circle id="椭圆形" fill-opacity="0.4" fill="#FFFFFF" filter="url(#filter-3)" cx="9.77777778" cy="5.33333333" r="1"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

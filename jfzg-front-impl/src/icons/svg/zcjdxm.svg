@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Shape-success备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="项目调度-集群概览" transform="translate(-832.000000, -609.000000)">
+            <g id="编组-17" transform="translate(520.000000, 496.000000)">
+                <g id="编组-24" transform="translate(292.000000, 48.000000)">
+                    <g id="编组-4" transform="translate(20.000000, 65.000000)">
+                        <path d="M8,16 C3.58162268,16 0,12.4183773 0,8 C0,3.58162268 3.58162268,0 8,0 C12.4183773,0 16,3.58162268 16,8 C16,12.4183773 12.4183773,16 8,16 L8,16 Z" id="Shape备份-2" fill="#007AFF" transform="translate(8.000000, 8.000000) scale(1, -1) translate(-8.000000, -8.000000) "></path>
+                        <path d="M6.7773501,4.5182334 L11.3759623,7.58397485 C11.6057266,7.73715108 11.6678136,8.04758575 11.5146373,8.2773501 C11.4780199,8.33227624 11.4308884,8.37940772 11.3759623,8.41602515 L6.7773501,11.4817666 C6.54758575,11.6349428 6.23715108,11.5728559 6.08397485,11.3430916 C6.02921901,11.2609578 6,11.1644539 6,11.0657415 L6,4.93425855 C6,4.65811617 6.22385763,4.43425855 6.5,4.43425855 C6.59871249,4.43425855 6.69521634,4.46347756 6.7773501,4.5182334 Z" id="矩形" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

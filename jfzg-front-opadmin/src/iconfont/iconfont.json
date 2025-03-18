@@ -1,0 +1,128 @@
+{
+  "id": "2318364",
+  "name": "前端代码生成器",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1580811",
+      "name": "按钮",
+      "font_class": "anniu",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "6502218",
+      "name": "bars",
+      "font_class": "bars",
+      "unicode": "e68d",
+      "unicode_decimal": 59021
+    },
+    {
+      "icon_id": "2028355",
+      "name": "radio",
+      "font_class": "radio",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    },
+    {
+      "icon_id": "4821791",
+      "name": "star, mark, highligh",
+      "font_class": "starmarkhighligh",
+      "unicode": "e90d",
+      "unicode_decimal": 59661
+    },
+    {
+      "icon_id": "5026046",
+      "name": "up-load",
+      "font_class": "up-load",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "9095594",
+      "name": "number",
+      "font_class": "number",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "9728275",
+      "name": "editor",
+      "font_class": "icon-editor",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "16358269",
+      "name": "check-box",
+      "font_class": "check-box",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "18953070",
+      "name": "switch",
+      "font_class": "switch",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "19027841",
+      "name": "date-time",
+      "font_class": "date-time",
+      "unicode": "e6fe",
+      "unicode_decimal": 59134
+    },
+    {
+      "icon_id": "19268519",
+      "name": "date_range",
+      "font_class": "date_range",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "19319924",
+      "name": "selectbox",
+      "font_class": "selectbox",
+      "unicode": "e6d4",
+      "unicode_decimal": 59092
+    },
+    {
+      "icon_id": "836441",
+      "name": "clone",
+      "font_class": "clone",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "8569504",
+      "name": "trash",
+      "font_class": "trash",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "17452415",
+      "name": "drag",
+      "font_class": "drag",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "18727247",
+      "name": "textarea",
+      "font_class": "textarea",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "18727200",
+      "name": "input",
+      "font_class": "input",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    }
+  ]
+}

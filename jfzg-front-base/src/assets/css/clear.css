@@ -1,0 +1,217 @@
+body {
+  line-height: 1.666;
+  color: #666;
+  font-size: 14px;
+}
+
+body,
+input {
+  font-family: "verdana";
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+p,
+dl,
+dt,
+dd,
+table,
+th,
+td,
+div {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table,
+th,
+td,
+img {
+  border: 0;
+}
+
+em,
+i,
+th {
+  font-style: normal;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+input,
+select,
+button,
+textarea,
+table {
+  margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+}
+
+input,
+button {
+  outline: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: #666;
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+select {
+  background-color: #fff;
+}
+
+/* 常用样式 */
+.display-block {
+  display: block;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-v-center {
+  align-items: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flex-around {
+  justify-content: space-around;
+}
+
+.flex-v-around {
+  align-items: space-around;
+}
+
+.flex-v-between {
+  align-items: space-between;
+}
+
+.flex-v-end {
+  align-items: flex-end;
+}
+
+.flex_1 {
+  flex-grow: 1;
+}
+
+.bg-fff {
+  background-color: #fff;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+html {
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  max-height: 100%;
+  font-size: 14px;
+  font-family: "Microsoft YaHei", "微软雅黑", "MicrosoftJhengHei", "STHeiti",
+    "MingLiu";
+  color: #303133;
+}
+
+/*滚动条样式*/
+.el-table ::-webkit-scrollbar {
+  width: 6px;
+  height: 16px;
+}
+.el-table ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border-radius: 8px;
+  background-color: #838282;
+  -webkit-box-shadow: inset 0 0 10px rgba(49, 49, 49, 0.2);
+}
+.el-table ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(48, 47, 47, 0.2);
+  border-radius: 8px;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+}
+

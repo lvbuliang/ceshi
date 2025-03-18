@@ -1,0 +1,33 @@
+/*
+ *子菜单样式
+ */
+.nest-menu {
+    .el-menu-item {
+        padding-left: 50px !important;
+    }
+}
+.menu-wrapper {
+    .el-submenu__title {
+        font-size: 14px;
+    }
+}
+.sidebar-container .is-active > .el-submenu__title {
+    font-size: 14px;
+}
+.el-menu {
+    width: $collapseBarWidth;
+    transition: width 1s ease;
+    .el-submenu__icon-arrow{
+        display: none;
+    }
+}
+.el-menu:not(.el-menu--collapse) {
+    width: $sideBarWidth;
+    transition: width 1s ease;
+    .el-submenu__icon-arrow{
+        display: block;
+    }
+}
+.el-submenu__icon-arrow{
+    margin-top: -5px;
+}

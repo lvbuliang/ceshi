@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>等待备份</title>
+    <defs>
+        <linearGradient x1="100%" y1="100%" x2="6.57848011%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#41C169" offset="0%"></stop>
+            <stop stop-color="#18974B" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="项目跟踪首页（补充)" transform="translate(-715.000000, -820.000000)" fill-rule="nonzero">
+            <g id="编组-13" transform="translate(699.000000, 685.000000)">
+                <g id="等待备份" transform="translate(16.000000, 135.000000)">
+                    <rect id="矩形" fill="url(#linearGradient-1)" x="0" y="0" width="16" height="16" rx="4"></rect>
+                    <path d="M7.42870174,11.8565575 C7.2778228,11.8565575 7.1323005,11.7967416 7.02427474,11.6887158 L4.16739528,8.83183636 C3.94420157,8.60864265 3.94420157,8.24706885 4.16739528,8.02387514 C4.39058899,7.80068143 4.7521628,7.80068143 4.9753565,8.02387514 L7.35103033,10.399549 L10.960519,5.24377431 C11.1417523,4.98576238 11.4979694,4.92237537 11.7559814,5.10271589 C12.0148861,5.28394918 12.0773803,5.64016634 11.8970398,5.89817826 L7.89740853,11.6119372 C7.80098885,11.7503173 7.64743158,11.838702 7.47958991,11.8538792 C7.46173441,11.8556647 7.44477169,11.8565575 7.42870174,11.8565575 Z" id="路径" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

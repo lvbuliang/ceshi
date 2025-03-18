@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>已办1@2x</title>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="245.534844%" y2="150.561415%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <path d="M8.6484375,9.60350567 L14.4257812,4.16600567 C14.1445313,3.88475567 9.77261581,2.12956091 8.6484375,1.76207277 C8.08903036,1.57920544 8.01932419,1.5 7.61132812,1.5 C7.21170694,1.5 7.16893717,1.54084043 6.57421875,1.76207277 C5.60907497,2.12110154 1.078125,3.88475567 0.796875,4.16600567 L6.57421875,9.60350567 C7.13671875,10.1660057 8.02734375,10.1660057 8.6484375,9.60350567 Z M8.6484375,11.3495994 C8.0859375,11.9120994 7.13671875,11.9120994 6.57421875,11.3495994 L0.29296875,5.51366192 L0.29296875,13.7167869 C0.29296875,14.5605369 0.9609375,15.2285057 1.8046875,15.2285057 L13.3007813,15.2285057 C14.1445313,15.2285057 14.8125,14.5605369 14.8125,13.7167869 L14.8125,5.51366192 L8.6484375,11.3495994 Z" id="path-2"></path>
+        <filter x="-24.1%" y="-18.2%" width="148.2%" height="151.0%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.154092002 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="工作台0624" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="待办优化" transform="translate(-294.000000, -383.000000)">
+            <g id="已读" transform="translate(294.000000, 383.000000)">
+                <rect id="矩形备份-15" fill="#CCCCCC" x="0" y="0" width="24" height="24" rx="3"></rect>
+                <g id="未读点击后备份" transform="translate(4.500000, 3.000000)" fill-rule="nonzero">
+                    <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="15" height="15"></rect>
+                    <g id="形状">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                        <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

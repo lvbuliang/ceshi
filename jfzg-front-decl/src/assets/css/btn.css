@@ -1,0 +1,17 @@
+.el-button {
+    border-radius: 4px !important;
+}
+.sr_search .search_right_button .el-button {
+    border-radius: 50% !important;
+}
+    
+
+.sr_list {
+  width:90%;
+  overflow: hidden;
+  /*内容超出后隐藏*/
+  text-overflow: ellipsis;
+  /*超出内容显示为省略号*/
+  white-space: nowrap;
+  /*文本不进行换行*/
+}

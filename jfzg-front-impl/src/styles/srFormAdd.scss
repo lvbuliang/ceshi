@@ -1,0 +1,15 @@
+.sr-qiankun-add {
+    // background: red;
+    .el-tabs__nav-wrap {
+        &::after {
+            height: 1px;
+        }
+    }
+    .sr-add{
+        .rightSlot{
+            .el-form-item__content{
+                margin-left: 0 !important;
+            }
+        }
+    }
+}

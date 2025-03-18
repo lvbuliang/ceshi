@@ -1,0 +1,56 @@
+// 公共
+
+$bgColor:#218EFF;
+$faceColor:#fff;
+$normalColor:#007AFF;
+$face333:#333;
+$face999:#999;
+$hoverColor:#2994FF;
+$curtainColor:rgba(0,0,0,0.4);// 幕层背景色
+
+$riskColor:#F5222D;
+$cautionColor:#F7A900;
+$safetyColor:#52C41A;
+$executeColor:#007AFF;
+// 头
+$headerHeight: 120px;
+$ShortHeaderHeight: 68px;
+$headerConterBg:url('../assets/layout/csTop.png');// 头部背景图片
+// $headerLeftBg:url('../assets/layout/leftCloud.png');// 头部背景图片 左
+// $headerRightBg:url('../assets/layout/rightCloud.png');// 头部背景图片 右
+
+// 内容部分
+$widthContent:1440px;// 页面内容宽
+// $topBg:url('../assets/layout/topBg.png');// 内容上背景图片 网状风格
+// $bottomBg:url('../assets/layout/bottomBg.png');// 内容下背景图片 城市风格
+// $topBg:url('../assets/layout/numBg.png');// 内容上背景图片 数字风格
+// $bottomBg:url('../assets/layout/giantBg.png');// 内容下背景图片 伟人风格
+$topBg:url('../assets/layout/csNum.png');// 内容上背景图片 数字风格
+$bottomBg:url('../assets/layout/csCity.png');// 内容下背景图片 长沙城市风格
+// left 
+$sideBarWidth: 240px;// 侧边栏宽
+$sideBgColor:#0090FF;
+$sideHoverColor:#0068BE;// 侧边栏单个数据滑动颜色
+$menuBg:#0090FF;
+$menuCol:#fff;//左边菜单字体颜色
+$menuHover:rgba(101,159,255,0.11); // #fff; //#e6f7ff
+// footer
+$bgColorFooter:#0068BE;
+
+// tabs
+$tabsHeadBgColor:#FAFAFA;
+$tabsBorder:#71A8E4;
+$tabsClickBgColor:rgba(24,144,255,0.1);
+$tabsClickColor:#0090FF;
+
+// 手风琴
+$collapseFaceColor:#096EBF;
+$collapseBgColorCardinal:#ECF2FC;// 手风琴背景色基数
+
+// 按钮
+$buttonColor:#1890FF;
+.viewer-backdrop{
+    background: #fff;
+}
+
+

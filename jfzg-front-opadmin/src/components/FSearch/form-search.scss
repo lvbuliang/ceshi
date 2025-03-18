@@ -1,0 +1,141 @@
+.search {
+  position: relative;
+  background-color: #f6f6f6;
+  .el-button--medium {
+    width: 33px;
+    border-radius: 16px;
+    padding: 5px 16px;
+    font-size: 14px;
+    height: 22px;
+    border: 0;
+    box-sizing: content-box;
+  }
+
+  ::v-deep .el-input__inner {
+    color: #333;
+  }
+  ::v-deep input::placeholder {
+    color: #d1e1ec;
+    font-size: 14px;
+  }
+  ::v-deep input::-webkit-input-placeholder {
+    color: #d1e1ec;
+    font-size: 14px;
+  }
+  ::v-deep input::-moz-input-placeholder {
+    color: #d1e1ec;
+    font-size: 14px;
+  }
+  ::v-deep input::-ms-input-placeholder {
+    color: #d1e1ec;
+    font-size: 14px;
+  }
+  ::v-deep .el-date-editor .el-range__icon {
+    font-size: 16px;
+  }
+  ::v-deep .el-icon-date {
+    display: none;
+  }
+  .resetBtn {
+    background-color: #fff;
+    color: #007aff;
+    border: 1px solid #007aff;
+  }
+  .search-cont {
+    border-radius: 16px;
+    padding-left: 0;
+    padding-bottom: 0px;
+  }
+  .mb20 {
+    margin-bottom: 24px;
+  }
+  .container {
+    background: #fff;
+    padding-bottom: 0;
+  }
+  .expand {
+    cursor: pointer;
+    margin: 0 auto;
+    width: 96px;
+    text-align: center;
+    height: 22px;
+    line-height: 26px;
+    background: url("../../assets/expand_bg.png") left top no-repeat;
+    color: #c4c1c4;
+  }
+  .el-form {
+    display: flex;
+    flex-wrap: wrap;
+    ::v-deep .el-form-item__label {
+      padding-left: 0px !important;
+    }
+    ::v-deep .el-form-item {
+      margin-bottom: 16px;
+      width: 31%;
+      display: flex;
+      align-items: center;
+      margin-right: 48px;
+      &.none {
+        display: none;
+      }
+      &__label {
+        font-weight: normal;
+        font-size: 14px;
+        padding-left: 12px;
+      }
+      &__content {
+        flex-grow: 1;
+        height: 32px;
+        line-height: 32px;
+        .el-input__inner {
+          width: 100% !important;
+        }
+      }
+      &.time {
+        width: 65%;
+      }
+      &:nth-child(1) {
+        label {
+          padding: 0;
+        }
+      }
+    }
+    ::v-deep .el-range-separator {
+      width: 10% !important;
+    }
+    ::v-deep .el-range-input {
+      width: 40% !important;
+    }
+    .el-input,
+    .el-select,
+    .el-cascader {
+      width: 100%;
+    }
+    ::v-deep .el-date-editor {
+      .el-input__inner {
+        padding-right: 15px;
+      }
+    }
+  }
+  .search-cont {
+    padding-right: 150px;
+    &.multiple {
+      padding-right: 210px;
+    }
+    .btns {
+      display: flex;
+      position: absolute;
+      right: 0px;
+      top: 3px;
+      .expand-btn {
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        font-size: 14px;
+        .iconfont {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

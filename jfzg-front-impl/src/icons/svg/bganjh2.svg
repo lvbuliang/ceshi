@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="24px" viewBox="0 0 10 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>bganjh2</title>
+    <g id="优化" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.可研管理-新建（新增样式）" transform="translate(-391.000000, -1442.000000)">
+            <g id="编组-13备份" transform="translate(389.000000, 1434.000000)">
+                <g id="bganjh2" transform="translate(2.000000, 8.000000)">
+                    <circle id="椭圆形" fill="#FFFFFF" cx="5" cy="5" r="1"></circle>
+                    <circle id="椭圆形备份" fill-opacity="0.500136582" fill="#FFFFFF" cx="5" cy="12" r="1"></circle>
+                    <g id="arrow-down" transform="translate(1.000000, 15.000000)" fill-rule="nonzero">
+                        <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="8" height="8"></rect>
+                        <polygon id="路径" fill="#FFFFFF" points="3.912 4.371 2.08821179 2.54790276 1.38149002 3.25529645 3.91274559 5.78538965 6.4418484 3.25511532 5.73479502 2.54806194"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
