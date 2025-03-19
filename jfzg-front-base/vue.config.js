@@ -84,6 +84,8 @@ module.exports = {
         prependData: `@import "./src/assets/css/variables/variables.scss";`,
       },
     },
+        // 确保CSS被提取，而不是通过JavaScript动态注入
+        extract: true
   },
   configureWebpack: {
     externals: {

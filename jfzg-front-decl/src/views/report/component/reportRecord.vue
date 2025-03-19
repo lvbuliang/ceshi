@@ -124,7 +124,7 @@ export default {
               prop: "createTime",
               isShow: true,
               index: 3,
-              width: "160px",
+              width: "170px",
             },
           ],
           indexConfig: {

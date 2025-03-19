@@ -3,14 +3,14 @@
     <!-- 总表 -->
     <el-dialog
       :visible.sync="dialogVisible"
-      width="1000px"
+      width="1050px"
       :before-close="handleClose"
       :close-on-click-modal="false"
       :append-to-body="true"
       :showClose="false"
       class="bzhTableHeader"
     >
-      <div class="content_box">
+      <div class="content_box" :style="{ opacity: isLoading ? 0.1 : 1 }">
         <div class="content_title">成员管理</div>
         <div class="conTitle">
           <div class="sys">
@@ -123,7 +123,12 @@
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="handleClose">取 消</el-button>
-        <el-button type="primary" @click="sectionSorts > 1 ? saveHeader2() : saveHeader()"> 保存 </el-button>
+        <el-button
+          type="primary"
+          @click="sectionSorts > 1 ? saveHeader2() : saveHeader()"
+        >
+          保存
+        </el-button>
       </div>
     </el-dialog>
     <DialogT
@@ -140,9 +145,7 @@
 
 <script>
 import vuedraggable from "vuedraggable";
-import {
-  getListByPage,
-} from "@/api/projectLibrary";
+import { getListByPage } from "@/api/projectLibrary";
 import {
   getQueryBizunitsByProperty,
   getProjectDetail,
@@ -192,6 +195,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false, // 新增加载状态
       openType: null,
       cjdwConfig,
       result: [],
@@ -407,10 +411,10 @@ export default {
   methods: {
     async initData() {
       await Promise.all([
-        this.getProjectDetailA(),
-        this.getUserByRoleCodeA(),
         this.getQueryBizunitsByPropertyA("CJDW"),
         this.getQueryBizunitsByPropertyA("JLDW"),
+        this.getProjectDetailA(),
+        this.getUserByRoleCodeA(),
         this.queryUsersByBuPropertyA(),
       ]);
     },
@@ -424,7 +428,10 @@ export default {
               this.result.push({ ...this.cjdwConfig });
             }
             this.$set(this.form.config[7], "name", "周报审批人");
-            this.form.config = this.form.config.slice(0, this.form.config.length - 3);
+            this.form.config = this.form.config.slice(
+              0,
+              this.form.config.length - 3
+            );
           }
         }
       });
@@ -438,33 +445,33 @@ export default {
         queryUsersByBuProperty(40),
         queryUsersByBuProperty(4),
       ]);
-      this.datazbAll = [
-        ...res1.data,
-        ...res2.data,
-        ...res3.data,
-      ].map((item) => {
-        const { buid, buName, buUniqueCode } = item;
-        const userBaseInfoVos = [
-          {
-            jfid: item.jfid,
-            roleCode: item.roleCode,
+      this.datazbAll = [...res1.data, ...res2.data, ...res3.data].map(
+        (item) => {
+          const { buid, buName, buUniqueCode } = item;
+          const userBaseInfoVos = [
+            {
+              jfid: item.jfid,
+              roleCode: item.roleCode,
+              buid,
+              buName,
+              roleName: item.roleName,
+              fullname: item.fullname,
+              buUniqueCode,
+            },
+          ];
+          return {
             buid,
             buName,
-            roleName: item.roleName,
-            fullname: item.fullname,
             buUniqueCode,
-          },
-        ];
-        return {
-          buid,
-          buName,
-          buUniqueCode,
-          userBaseInfoVos,
-        };
-      });
+            userBaseInfoVos,
+          };
+        }
+      );
 
       this.dataCopy = this.datazbAll.reduce((acc, current) => {
-        const existingIndex = acc.findIndex((item) => item.buid === current.buid);
+        const existingIndex = acc.findIndex(
+          (item) => item.buid === current.buid
+        );
         if (existingIndex !== -1) {
           acc[existingIndex].userBaseInfoVos.push(...current.userBaseInfoVos);
         } else {
@@ -491,16 +498,25 @@ export default {
     },
     changeA(index, val, type) {
       this.value1Index = index;
-      console.log('index:', index, 'value1Index:', this.value1Index, '承建单位:', this.contractUnit, this.options1);
+      console.log(
+        "index:",
+        index,
+        "value1Index:",
+        this.value1Index,
+        "承建单位:",
+        this.contractUnit,
+        this.options1
+      );
 
-      if (type === 'change') {
-        this.contractor[index] = '';
-        this.contractorName[index] = '';
-        this.contractorPhoneNumber[index] = '';
+      if (type === "change") {
+        this.contractor[index] = "";
+        this.contractorName[index] = "";
+        this.contractorPhoneNumber[index] = "";
       }
-
-      const idx = this.options1.findIndex((item) => item.dataValue === String(val));
-      this.contractUnitFullName[index] = this.options1[idx].dataName;
+      const idx = this.options1.findIndex(
+        (item) => item.dataValue === String(val)
+      );
+      console.log(idx, "idxidx");
 
       getUserByRoleCode({
         roleCode: "CJDW_XMJL",
@@ -508,35 +524,46 @@ export default {
       }).then((res) => {
         if (res.data) {
           this.options2 = res.data
-           .filter((element) => element.fullname)
-           .map((element) => ({
+            .filter((element) => element.fullname)
+            .map((element) => ({
               dataName: String(element.fullname),
               dataValue: String(element.jfid),
               mobile: String(element.mobile),
             }));
         }
       });
+
+      this.contractUnitFullName[index] = this.options1[idx].dataName;
     },
     clearA(index) {
-      this.contractUnit[index] = '';
-      this.contractUnitFullName[index] = '';
-      this.contractor[index] = '';
-      this.contractorName[index] = '';
-      this.contractorPhoneNumber[index] = '';
+      this.contractUnit[index] = "";
+      this.contractUnitFullName[index] = "";
+      this.contractor[index] = "";
+      this.contractorName[index] = "";
+      this.contractorPhoneNumber[index] = "";
     },
     changeB(index, val) {
-      const idx = this.options2.findIndex((item) => item.dataValue === String(val));
+      const idx = this.options2.findIndex(
+        (item) => item.dataValue === String(val)
+      );
       this.contractorName[index] = this.options2[idx].dataName;
       this.contractorPhoneNumber[index] = this.options2[idx].mobile;
     },
     clearB(index) {
-      this.contractor[index] = '';
-      this.contractorName[index] = '';
-      this.contractorPhoneNumber[index] = '';
+      this.contractor[index] = "";
+      this.contractorName[index] = "";
+      this.contractorPhoneNumber[index] = "";
     },
     saveHeader() {
       const data = this.$refs["add1"].validate();
-      console.log("成员管理保存的数据", this.contractUnit, this.contractor, this.contractorPhoneNumber, this.weeklyPerson, this.weeklyPersonId);
+      console.log(
+        "成员管理保存的数据",
+        this.contractUnit,
+        this.contractor,
+        this.contractorPhoneNumber,
+        this.weeklyPerson,
+        this.weeklyPersonId
+      );
 
       this.fillDataNames(data);
       this.$emit("saveLabelList", data);
@@ -546,38 +573,38 @@ export default {
       const data = this.$refs["add1"].validate();
       this.fillDataNames(data);
 
-      if (this.contractor[0] === '') {
+      if (this.contractor[0] === "") {
         this.contractor = [];
         this.contractorName = [];
       }
-      if (this.contractUnit[0] === '') {
+      if (this.contractUnit[0] === "") {
         this.contractUnit = [];
         this.contractUnitFullName = [];
       }
-      if (this.contractorPhoneNumber[0] === '') {
+      if (this.contractorPhoneNumber[0] === "") {
         this.contractorPhoneNumber = [];
       }
 
       const newArr = Array.from({ length: this.result.length }, (_, index) => ({
-        contractUnit: '',
-        contractUnitFullName: '',
-        contractor: '',
-        contractorName: '',
-        contractorPhoneNumber: '',
+        contractUnit: "",
+        contractUnitFullName: "",
+        contractor: "",
+        contractorName: "",
+        contractorPhoneNumber: "",
         fieldNo: index + 1,
-        weeklyPerson: '',
-        weeklyPersonId: '',
-        projectId: '',
+        weeklyPerson: "",
+        weeklyPersonId: "",
+        projectId: "",
       }));
 
       const newArr2 = newArr.map((item, index) => ({
-        contractUnit: this.contractUnit[index] || '',
-        contractUnitFullName: this.contractUnitFullName[index] || '',
-        contractor: this.contractor[index] || '',
-        contractorName: this.contractorName[index] || '',
-        contractorPhoneNumber: this.contractorPhoneNumber[index] || '',
-        weeklyPerson: this.weeklyPerson[index] || '',
-        weeklyPersonId: this.weeklyPersonId[index] || '',
+        contractUnit: this.contractUnit[index] || "",
+        contractUnitFullName: this.contractUnitFullName[index] || "",
+        contractor: this.contractor[index] || "",
+        contractorName: this.contractorName[index] || "",
+        contractorPhoneNumber: this.contractorPhoneNumber[index] || "",
+        weeklyPerson: this.weeklyPerson[index] || "",
+        weeklyPersonId: this.weeklyPersonId[index] || "",
         projectId: item.projectId,
         fieldNo: item.fieldNo,
       }));
@@ -588,19 +615,22 @@ export default {
     // 成员管理回显数据
     getMemberManage(babaData) {
       getProjectDetail({ id: babaData }).then((res) => {
-        console.log(res, "ssssssssssssssss");
-        console.log(res.data.contractUnit, 'res.data.contractUnit');
+        console.log(res.data, "成员管理回显数据---------");
+        console.log(res.data.contractUnit, "res.data.contractUnit");
 
         this.fillFormData(res.data);
         this.title.systenName = res.data.systemName;
         this.title.projectName = res.data.projectName;
 
-        if (res.data.menberFieldInfoList && res.data.menberFieldInfoList.length > 0) {
+        if (
+          res.data.menberFieldInfoList &&
+          res.data.menberFieldInfoList.length > 0
+        ) {
           this.resetMultiSectionData();
           res.data.menberFieldInfoList.forEach((item, index) => {
             this.contractUnit.push(String(item.contractUnit));
             this.contractUnitFullName.push(item.contractUnitFullName);
-            this.changeA(index, String(item.contractUnit), 'huixian');
+            this.changeA(index, String(item.contractUnit), "huixian");
             this.contractor.push(String(item.contractor));
             this.contractorName.push(item.contractorName);
             this.contractorPhoneNumber.push(item.contractorPhoneNumber);
@@ -608,12 +638,18 @@ export default {
             this.weeklyPersonId.push(item.weeklyPersonId);
           });
         }
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       });
     },
     getProjectDetailA() {
       if (this.memberManageText === "成员管理内") {
         this.getMemberManage(this.babaData);
-      } else if (this.memberManageText === "成员管理外" && this.pilIds.length === 1) {
+      } else if (
+        this.memberManageText === "成员管理外" &&
+        this.pilIds.length === 1
+      ) {
         this.getMemberManage(this.pilIds[0]);
       }
     },
@@ -639,8 +675,8 @@ export default {
       responses.forEach((res, index) => {
         const roleList = roleMap[roleCodes[index]];
         this.form.enums[roleList] = res.data
-         .filter((element) => element.fullname)
-         .map((element) => ({
+          .filter((element) => element.fullname)
+          .map((element) => ({
             dataName: String(element.fullname),
             dataValue: String(element.jfid),
           }));
@@ -653,8 +689,8 @@ export default {
         buid: val,
       }).then((res) => {
         this.form.enums.contractorNameList = res.data
-         .filter((element) => element.fullname)
-         .map((element) => ({
+          .filter((element) => element.fullname)
+          .map((element) => ({
             dataName: String(element.fullname),
             dataValue: String(element.jfid),
             mobile: String(element.mobile),
@@ -668,8 +704,8 @@ export default {
         buid: val,
       }).then((res) => {
         this.form.enums.controlNameList = res.data
-         .filter((element) => element.fullname)
-         .map((element) => ({
+          .filter((element) => element.fullname)
+          .map((element) => ({
             dataName: String(element.fullname),
             dataValue: String(element.jfid),
             mobile: String(element.mobile),
@@ -708,7 +744,9 @@ export default {
     // 承建经理
     selectCJJL(val) {
       if (val) {
-        const item = this.form.enums.contractorNameList.find((item) => String(val) === item.dataValue);
+        const item = this.form.enums.contractorNameList.find(
+          (item) => String(val) === item.dataValue
+        );
         this.form.data.contractorPhoneNumber = item ? item.mobile : "";
       } else {
         this.form.data.contractorPhoneNumber = "";
@@ -717,7 +755,9 @@ export default {
     // 监理工程师
     selectJLGCS(val) {
       if (val) {
-        const item = this.form.enums.controlNameList.find((item) => String(val) === item.dataValue);
+        const item = this.form.enums.controlNameList.find(
+          (item) => String(val) === item.dataValue
+        );
         this.form.data.controlorPhoneNumber = item ? item.mobile : "";
       } else {
         this.form.data.controlorPhoneNumber = "";
@@ -726,13 +766,41 @@ export default {
     fillDataNames(data) {
       const fields = [
         { idField: "contactId", nameField: "contactName", list: "xmfzrList" },
-        { idField: "programManagerId", nameField: "programManagerName", list: "programManagerList" },
-        { idField: "clientManagerId", nameField: "clientManagerName", list: "clientManagerList" },
-        { idField: "procurementManagerId", nameField: "procurementManagerName", list: "procurementManagerNameList" },
-        { idField: "contractUnit", nameField: "contractUnitFullName", list: "contractUnitFullName" },
-        { idField: "contractor", nameField: "contractorName", list: "contractorNameList" },
-        { idField: "controlUnit", nameField: "controlUnitFullName", list: "jlList" },
-        { idField: "controlJfid", nameField: "controlName", list: "controlNameList" },
+        {
+          idField: "programManagerId",
+          nameField: "programManagerName",
+          list: "programManagerList",
+        },
+        {
+          idField: "clientManagerId",
+          nameField: "clientManagerName",
+          list: "clientManagerList",
+        },
+        {
+          idField: "procurementManagerId",
+          nameField: "procurementManagerName",
+          list: "procurementManagerNameList",
+        },
+        {
+          idField: "contractUnit",
+          nameField: "contractUnitFullName",
+          list: "contractUnitFullName",
+        },
+        {
+          idField: "contractor",
+          nameField: "contractorName",
+          list: "contractorNameList",
+        },
+        {
+          idField: "controlUnit",
+          nameField: "controlUnitFullName",
+          list: "jlList",
+        },
+        {
+          idField: "controlJfid",
+          nameField: "controlName",
+          list: "controlNameList",
+        },
       ];
 
       fields.forEach(({ idField, nameField, list }) => {
@@ -861,7 +929,9 @@ export default {
     }
   }
 }
-
+.content_box {
+  transition: opacity 0.3s;
+}
 .bzhTableHeader .el-dialog__body .content_box .content_title {
   height: 56px;
   padding-left: 16px;
@@ -884,6 +954,44 @@ export default {
 
   .el-button {
     border-radius: 4px !important;
+  }
+}
+
+/* 加载动画样式 */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  text-align: center;
+}
+
+.loading-spinner i {
+  font-size: 40px;
+  color: #409eff;
+  animation: rotating 2s linear infinite;
+}
+
+.loading-spinner p {
+  margin-top: 10px;
+  color: #606266;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

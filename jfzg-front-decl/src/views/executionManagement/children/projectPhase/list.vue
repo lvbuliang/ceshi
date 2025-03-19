@@ -215,92 +215,98 @@
 
           <el-table-column fixed="right" label="操作" min-width="220">
             <template slot-scope="scope">
-              <div style='display: flex;'>
-
-           
-              <el-button
-                type="text"
-                size="small"
-                @click="handleEdit1(scope.row)"
-                v-if="hasConstructionPermission"
-              >
-                <span v-if="scope.row.newList != 0"> 编辑 </span>
-                <span v-else>
-                  <span
-                    v-if="
-                      userInfo.fullname == JSON.parse(scope.row.currentFounder)
-                    "
-                  >
-                    编辑
-                  </span>
-                </span>
-              </el-button>
-              <el-button
-                type="text"
-                size="small"
-                @click="conserve(scope.row)"
-                v-if="hasConstructionPermission"
-              >
-                <span v-if="scope.row.newList != 0"> 保存 </span>
-                <span v-else>
-                  <span
-                    v-if="
-                      userInfo.fullname == JSON.parse(scope.row.currentFounder)
-                    "
-                  >
-                    保存
-                  </span>
-                </span>
-              </el-button>
-              <el-button
-                type="text"
-                size="small"
-                @click="jdRwdel(scope.row)"
-                v-if="hasConstructionPermission"
-              >
-                <!-- isDeleteSub; -->
-                <span
-                  v-if="scope.row.newList != 0 && scope.row.isDeleteSub != 0"
+              <div style="display: flex">
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="handleEdit1(scope.row)"
+                  v-if="hasConstructionPermission"
                 >
-                  删除
-                </span>
-                <span v-else>
+                  <span v-if="scope.row.newList != 0"> 编辑 </span>
+                  <span v-else>
+                    <span
+                      v-if="
+                        userInfo.fullname ==
+                        JSON.parse(scope.row.currentFounder)
+                      "
+                    >
+                      编辑
+                    </span>
+                  </span>
+                </el-button>
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="conserve(scope.row)"
+                  v-if="hasConstructionPermission"
+                >
+                  <span v-if="scope.row.newList != 0"> 保存 </span>
+                  <span v-else>
+                    <span
+                      v-if="
+                        userInfo.fullname ==
+                        JSON.parse(scope.row.currentFounder)
+                      "
+                    >
+                      保存
+                    </span>
+                  </span>
+                </el-button>
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="jdRwdel(scope.row)"
+                  v-if="hasConstructionPermission"
+                >
+                  <!-- isDeleteSub; -->
+                  <!-- isDeliverySource -->
                   <span
                     v-if="
-                      userInfo.fullname == JSON.parse(scope.row.currentFounder)
+                      scope.row.isDeliverySource == null &&
+                      scope.row.newList != 0 &&
+                      scope.row.isDeleteSub != 0
                     "
                   >
                     删除
                   </span>
-                </span>
-              </el-button>
-              <el-button
-                type="text"
-                size="small"
-                @click="uploadLook(scope.row)"
-              >
-                查看
-              </el-button>
-
-              <span
-                class="uploading_span"
-                @click="uploading(scope.row, scope.$index)"
-                v-if="hasConstructionPermission"
-              >
-                <!-- 上传 -->
-
-                <SrAdd
-                  :config="form7.config"
-                  :form="form7.data"
-                  :enums="form7.enums"
-                  :otherConfig="form7.otherConfig"
-                  ref="add"
-                  class="add"
-                  @upload-complete="handleUploadComplete"
+                  <span v-else>
+                    <span
+                      v-if="
+                        scope.row.isDeliverySource == null ||
+                        userInfo.fullname ==
+                          JSON.parse(scope.row.currentFounder)
+                      "
+                      >删除
+                    </span>
+                  </span>
+                </el-button>
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="uploadLook(scope.row)"
                 >
-                </SrAdd>
-              </span>
-            </div>
+                  查看
+                </el-button>
+
+                <span
+                  class="uploading_span"
+                  @click="uploading(scope.row, scope.$index)"
+                  v-if="hasConstructionPermission"
+                >
+                  <!-- 上传 -->
+
+                  <SrAdd
+                    :config="form7.config"
+                    :form="form7.data"
+                    :enums="form7.enums"
+                    :otherConfig="form7.otherConfig"
+                    ref="add"
+                    class="add"
+                    @upload-complete="handleUploadComplete"
+                  >
+                  </SrAdd>
+                </span>
+              </div>
             </template>
           </el-table-column>
         </el-table>
@@ -318,6 +324,7 @@
       @preview="handlePreview"
       @download="handleDownload"
       @delete="handleDeletePlease"
+      @close="handleClose"
     />
   </div>
 </template>
@@ -1441,28 +1448,35 @@ export default {
       // this.uploadDialog = true;
     },
     uploadLook(row) {
-      console.log(row, "row");
-      console.log(row.subTaskName);
+      console.log(row.deliveries, "deliveries");
+      console.log(row.syncDeliveries, "syncDeliveries");
+      // 若是row.deliveries和row.syncDeliveries里面的值都为null的话便提示
+      if (row.deliveries != null || row.syncDeliveries != null) {
+        this.deliveryId = row.id;
+        this.deliverableName = "(" + row.subTaskName + ")交付物附件";
 
-      this.deliveryId = row.id;
-      this.deliverableName = "(" + row.subTaskName + ")交付物附件";
+        this.dialogVisible = true;
+        // row.deliveries 自己上传的交付物
+        this.previewForm.data.uploadFiles = row.deliveries;
+        // row.syncDeliveries 同步过来的交付物
+        this.Synchronous = row.syncDeliveries;
 
-      this.dialogVisible = true;
-      // row.deliveries 自己上传的交付物
-      this.previewForm.data.uploadFiles = row.deliveries;
-      // row.syncDeliveries 同步过来的交付物
-      this.Synchronous = row.syncDeliveries;
-      console.log(this.Synchronous, "syncDeliveries");
-      // 如果是开工阶段那么名称为：项目启动流程-开工申请环节交付物
-      // 如果是初步验收阶段那么名称为：项目初验流程-初验申请环节交付物
-      // 如果是终验阶段那么名称为：项目终验流程-终验申请环节交付物
-      console.log(this.userName.stageName, "data.stageNamedata.stageName");
-      if (this.userName.stageName == "开工阶段") {
-        this.SynchronousName = "项目启动流程-开工申请环节交付物";
-      } else if (this.userName.stageName == "初步验收阶段") {
-        this.SynchronousName = "项目初验流程-初验申请环节交付物";
-      } else if (this.userName.stageName == "终验阶段") {
-        this.SynchronousName = "项目终验流程-终验申请环节交付物";
+        // 如果是开工阶段那么名称为：项目启动流程-开工申请环节交付物
+        // 如果是初步验收阶段那么名称为：项目初验流程-初验申请环节交付物
+        // 如果是终验阶段那么名称为：项目终验流程-终验申请环节交付物
+        console.log(this.userName.stageName, "data.stageNamedata.stageName");
+        if (this.userName.stageName == "开工阶段") {
+          this.SynchronousName = "项目启动流程-开工申请环节交付物";
+        } else if (this.userName.stageName == "初步验收阶段") {
+          this.SynchronousName = "项目初验流程-初验申请环节交付物";
+        } else if (this.userName.stageName == "终验阶段") {
+          this.SynchronousName = "项目终验流程-终验申请环节交付物";
+        }
+      } else {
+        this.$message({
+          message: "暂无可查看附件，请上传后再试！",
+          duration: 2000,
+        });
       }
     },
     getSize(size) {
@@ -1564,6 +1578,9 @@ export default {
       window.open(
         `${this.baseUrl}/jfzg/file/api/file/download?key=${file.id}&access_token=${token}`
       );
+    },
+    handleClose() {
+      this.dialogVisible = false;
     },
     // 附件删除
     handleDeletePlease(file, index) {
@@ -1918,8 +1935,6 @@ export default {
   //  设置滚动条哑颜色，根据自己选择设置
   border-radius: 3px;
 }
-
-
 
 .stage_button {
   position: absolute;
@@ -2414,7 +2429,6 @@ export default {
 .uploading_span {
   font-size: 12px !important;
 }
-
 
 .deliverable-column {
   // width: 48%;

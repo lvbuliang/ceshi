@@ -91,11 +91,8 @@ module.exports = {
       'element-ui': 'ElementUI',
     },
   },
-  css: {
-    loaderOptions: {
-      sass: {
-        // prependData: `@import "./src/assets/css/variables/variables.scss";`
-      },
-    },
-  },
+// 微应用 vue.config.js
+css: {
+  extract: true, // 提取CSS为单独文件
+},
 }

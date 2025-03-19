@@ -393,7 +393,7 @@ export default {
           highlightCurrentRow: false, // 控制表格是否单选
           // maxLength: 20, // 一行最多显示多少字，超出显示popver
           maxHeight: 0,
-          // height: 0,
+          height: 0,
           tooltipEffect: "light",
           header: [],
           indexConfig: {
@@ -427,9 +427,6 @@ export default {
       isTableHeaderId: null,
     };
   },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.handleResize);
-  },
   computed: {
     shouldShowInfo() {
       return (row) => {
@@ -451,14 +448,13 @@ export default {
   },
   mounted() {
     this.init();
-    this.calculateTableHeight();
-    window.addEventListener("resize", this.handleResize);
+
   },
   methods: {
     calculateTableHeight() {
       // 调用工具函数并传入元素的 ref
       let height = getCommonTableHeight(this.$refs.searchRef);
-      this.$set(this.table.tableConfig, "maxHeight", height);
+      this.$set(this.table.tableConfig, "height", height);
     },
     // 单元格样式处理
     handleCellStyle({ row, column }) {
@@ -776,9 +772,6 @@ export default {
       // }
       this.dialogTableVisible = true;
     },
-    handleResize() {
-      this.pageHeight = window.innerHeight;
-    },
     // 时间日期格式化去除时分秒
     timeValueFormatter(time) {
       return time == null ? "-" : time.length == 10 ? time : time.substr(0, 10);
@@ -836,12 +829,12 @@ export default {
       });
       queryProjectLists(param)
         .then((res) => {
-          if (res.data) {
-            console.log("res.data.records", res.data.records);
+          if (res.data?.total>0) {
             this.isLoading = false;
             // this.table.page.pages = res.data.pages;
             this.table.page.total = res.data.total;
             this.table.data = res.data.records;
+            this.calculateTableHeight();
           } else {
             this.isLoading = false;
             this.noData = true;

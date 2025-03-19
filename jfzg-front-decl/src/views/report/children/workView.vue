@@ -9,15 +9,23 @@
       <!-- form.data[index].progress -->
       <div class="content_detail" v-for="(item, index) in form.data">
         <div style="margin-bottom: 16px">
-          <span style="margin-right: 20px" v-if="isDuobiaoduan">标段：{{ index + 1 }}</span>
-          <span style="margin-right: 20px">周报填报人：{{ item.reporter }}</span>
+          <span style="margin-right: 20px" v-if="isDuobiaoduan"
+            >标段：{{ index + 1 }}</span
+          >
+          <span style="margin-right: 20px"
+            >周报填报人：{{ item.reporter }}</span
+          >
           <span>填报时间：{{ item.createTime }}</span>
         </div>
         <div style="display: flex; align-item: start">
           <div>填报内容：</div>
           <div class="textClass">
-            <quill-editor placeholder="请输入文本..." v-model="form.data[index].progress" ref="myQuillEditor"
-              :options="editorOption"></quill-editor>
+            <quill-editor
+              placeholder="请输入文本..."
+              v-model="form.data[index].progress"
+              ref="myQuillEditor"
+              :options="editorOption"
+            ></quill-editor>
             <!-- <el-input type="textarea" v-model="form.data[index].progress"></el-input> -->
           </div>
           <!-- style="white-space: wrap; display: inline-block" -->
@@ -29,15 +37,23 @@
     <div class="content">
       <div class="content_detail" v-for="(item, index) in form.data">
         <div style="margin-bottom: 16px">
-          <span style="margin-right: 20px" v-if="isDuobiaoduan">标段：{{ index + 1 }}</span>
-          <span style="margin-right: 20px">周报填报人：{{ item.reporter }}</span>
+          <span style="margin-right: 20px" v-if="isDuobiaoduan"
+            >标段：{{ index + 1 }}</span
+          >
+          <span style="margin-right: 20px"
+            >周报填报人：{{ item.reporter }}</span
+          >
           <span>填报时间：{{ item.createTime }}</span>
         </div>
         <div style="display: flex; align-item: start">
           <div>填报内容：</div>
           <div class="textClass">
-            <quill-editor placeholder="请输入文本..." v-model="form.data[index].nextWorkPlan" ref="myQuillEditor"
-              :options="editorOption1">
+            <quill-editor
+              placeholder="请输入文本..."
+              v-model="form.data[index].nextWorkPlan"
+              ref="myQuillEditor"
+              :options="editorOption1"
+            >
             </quill-editor>
             <!-- <el-input type="textarea" v-model="form.data[index].nextWorkPlan"></el-input> -->
           </div>
@@ -50,15 +66,24 @@
     <div class="title">存在问题</div>
     <Question ref="question"></Question>
     <!-- </el-tabs> -->
-    <sr-work-flow :hideFrom="true" :clickMethods="clickmethods" :buttonList="buttonList" ref="work_flow"
-      backName="report"></sr-work-flow>
+    <sr-work-flow
+      :hideFrom="true"
+      :clickMethods="clickmethods"
+      :buttonList="buttonList"
+      ref="work_flow"
+      backName="report"
+    ></sr-work-flow>
   </div>
   <!-- </section> -->
 </template>
 <script>
 import SrNavPage from "../../../components/srNavPage.vue";
 import { api_getCustomFormTemplate } from "@/api/index";
-import { api_getReportById, examineReport, getSonReportById, } from "@/api/report/index";
+import {
+  api_getReportById,
+  examineReport,
+  getSonReportById,
+} from "@/api/report/index";
 import config from "@/settings.js";
 import upload from "@/utils/upload";
 import Question from "../component/question.vue";
@@ -506,10 +531,10 @@ export default {
     },
   },
   mounted() {
-    console.log('isDuobiaoduan', this.contractId);
+    console.log("isDuobiaoduan", this.contractId);
 
     if (this.contractId) {
-      this.getSon(this.id)
+      this.getSon(this.id);
     } else {
       // 详情
       this.getReportById(this.id);
@@ -530,6 +555,8 @@ export default {
           res.data.map((item, index) => {
             let { weeklyFile, startTime, endTime } = item;
             item.reportPeriod = startTime + "~" + endTime;
+
+            console.log(item, "item-----item");
             item.weeklyFile = weeklyFile ? JSON.parse(weeklyFile) : [];
             this.form.data[index] = JSON.parse(JSON.stringify(item));
           });
@@ -598,6 +625,9 @@ export default {
       let params = [];
       let length = this.$refs.question.table.length;
       let question = this.$refs.question;
+
+      console.log(this.form.data, "this.form.data");
+      console.log(this.form.data[0].weeklyFile, "this.form.data,ww");
       if (length > 0) {
         for (let i = 0; i < length; i++) {
           params.push({
@@ -662,8 +692,12 @@ export default {
               query: {
                 projectId: this.projectId,
                 id: this.id,
-                ProjectIdNum:this.$route.query.ProjectIdNum?this.$route.query.ProjectIdNum:'',
-                ContractIdNum:this.$route.query.ContractIdNum?this.$route.query.ContractIdNum:'',
+                ProjectIdNum: this.$route.query.ProjectIdNum
+                  ? this.$route.query.ProjectIdNum
+                  : "",
+                ContractIdNum: this.$route.query.ContractIdNum
+                  ? this.$route.query.ContractIdNum
+                  : "",
                 systemName: this.systemName,
                 projectName: this.projectName,
                 pageNum: this.$route.query.pageNum,
@@ -687,8 +721,12 @@ export default {
           query: {
             projectId: this.projectId,
             id: this.id,
-            ProjectIdNum:this.$route.query.ProjectIdNum?this.$route.query.ProjectIdNum:'',
-            ContractIdNum:this.$route.query.ContractIdNum?this.$route.query.ContractIdNum:'',
+            ProjectIdNum: this.$route.query.ProjectIdNum
+              ? this.$route.query.ProjectIdNum
+              : "",
+            ContractIdNum: this.$route.query.ContractIdNum
+              ? this.$route.query.ContractIdNum
+              : "",
             systemName: this.systemName,
             projectName: this.projectName,
             pageNum: this.$route.query.pageNum,
@@ -705,8 +743,12 @@ export default {
             id: this.id,
             systemName: this.systemName,
             projectName: this.projectName,
-            ProjectIdNum:this.$route.query.ProjectIdNum?this.$route.query.ProjectIdNum:'',
-            ContractIdNum:this.$route.query.ContractIdNum?this.$route.query.ContractIdNum:'',
+            ProjectIdNum: this.$route.query.ProjectIdNum
+              ? this.$route.query.ProjectIdNum
+              : "",
+            ContractIdNum: this.$route.query.ContractIdNum
+              ? this.$route.query.ContractIdNum
+              : "",
             pageNum: this.$route.query.pageNum,
             contractId: this.contractId,
             contactSPId: this.$route.query.contactSPId,
@@ -790,8 +832,12 @@ export default {
                 id: this.id,
                 systemName: this.systemName,
                 projectName: this.projectName,
-                ProjectIdNum:this.$route.query.ProjectIdNum?this.$route.query.ProjectIdNum:'',
-                ContractIdNum:this.$route.query.ContractIdNum?this.$route.query.ContractIdNum:'',
+                ProjectIdNum: this.$route.query.ProjectIdNum
+                  ? this.$route.query.ProjectIdNum
+                  : "",
+                ContractIdNum: this.$route.query.ContractIdNum
+                  ? this.$route.query.ContractIdNum
+                  : "",
                 pageNum: this.$route.query.pageNum,
                 contractId: this.contractId,
                 contactSPId: this.$route.query.contactSPId,
@@ -872,7 +918,7 @@ export default {
   display: none !important;
 }
 
-::v-deep .ql-toolbar.ql-snow+.ql-container.ql-snow {
+::v-deep .ql-toolbar.ql-snow + .ql-container.ql-snow {
   border-top: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;

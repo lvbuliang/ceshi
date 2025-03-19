@@ -118,7 +118,7 @@
       >
       </sr-work-flow> -->
     </el-tabs>
-    <el-divider></el-divider>
+    <!-- <el-divider></el-divider> -->
     <div class="container_bottom_btns">
       <el-button type="primary" size="small" @click="tg">提交</el-button>
       <el-button v-if="isShowBtn == 0" type="primary" size="small" @click="btg"
@@ -1291,6 +1291,7 @@ export default {
           let { weeklyFile, startTime, endTime, contactName, contactJfid } =
             res.data[0];
 
+          console.log(weeklyFile, "weeklyFile");
           let startTimeView = res.data[0].startTime;
           let endTimeView = res.data[0].endTime;
           this.isShowBtn = res.data[0].isDraft;
@@ -1308,6 +1309,8 @@ export default {
           this.reportPeriodEndView = endTimeView;
 
           res.data[0].weeklyFile = weeklyFile ? JSON.parse(weeklyFile) : [];
+
+
           this.table2.data = res.data[0].problemDto
             ? res.data[0].problemDto
             : [];
@@ -1326,6 +1329,7 @@ export default {
           this.$set(this.form.data, "reportPeriod", this.getNowTime());
         });
       } else {
+        
         api_getReportById({ id }).then((res) => {
           let { weeklyFile, startTime, endTime, contactName, contactJfid } =
             res.data[0];
@@ -1340,6 +1344,7 @@ export default {
             ? startTime.split(" ")[0]
             : startTime;
           this.reportPeriodEnd = endTime;
+          // weeklyFile
 
           this.reportPeriodStratView = startTimeView.includes("00")
             ? startTimeView.split(" ")[0]
@@ -1347,9 +1352,12 @@ export default {
           this.reportPeriodEndView = endTimeView;
 
           res.data[0].weeklyFile = weeklyFile ? JSON.parse(weeklyFile) : [];
+
           this.table2.data = res.data[0].problemDto
             ? res.data[0].problemDto
             : [];
+
+          console.log(res.data[0].weeklyFile, "res.data[0].weeklyFile");
           this.table2.page.total = this.table2.data.length;
           this.problemIds = this.table2.data.map((item) => item.id);
           this.table2.data2 = this.table2.data.slice(0, 5);
@@ -1644,161 +1652,6 @@ export default {
         }
       });
     }, 2000),
-
-    // tg: debounce(function () {
-    //   let data = this.$refs["add"][0].validate();
-    //   // console.log(data);
-    //   // console.log(this.$refs["formAdd"].$refs["add0"][0]);
-    //   console.log(this.$refs["add"][0]);
-    //   this.$refs["add"][0].validate((valid) => {
-    //     // this.$refs["formAdd"].$refs["add0"][0].validate((valid) => {
-    //     if (valid) {
-    //       // if (data) {
-    //       // let obj = data.data
-    //       //   ? this.$utils.resultObject(JSON.parse(data.data))
-    //       //   : {};
-
-    //       let params = {
-    //         ...data,
-    //         // ...obj,
-    //         // 其他附件
-    //         weeklyFile:
-    //           Array.isArray(data.weeklyFile) && JSON.stringify(data.weeklyFile),
-    //       };
-    //       // params.templateId = this.templateId;
-    //       // params.startTime = params.reportPeriod[0];
-    //       // params.endTime = params.reportPeriod[1];
-    //       params.startTime = this.reportPeriodStrat;
-    //       params.endTime = this.reportPeriodEnd;
-    //       params.projectId = this.projectId;
-    //       params.progress = this.form.data.progress;
-    //       params.nextWorkPlan = this.form.data.nextWorkPlan;
-    //       params.isDraft = 1;
-    //       params.problemDto = this.table2.data;
-    //       params.problemId = this.table.data.map((item) => item.id);
-    //       params.sectionSort = this.sectionSort;
-    //       if (this.$route.query.id) {
-    //         params.id = this.$route.query.id;
-    //       } else {
-    //         params.id = "";
-    //       }
-    //       if (this.$route.query.contractName) {
-    //         params.contractName = this.$route.query.contractName;
-    //       }
-    //       // if (this.$route.query.contractName) {
-    //       //   params.contractName = this.$route.query.contractName;
-    //       // }
-    //       if (this.$route.query.contractId) {
-    //         params.contractId = this.$route.query.contractId;
-    //       }
-    //       /* else if (
-    //           getSession("infoId_projectRecordAdd") &&
-    //           getSession("infoId_projectRecordAdd") != "null"
-    //         ) {
-    //           params.id = getSession("infoId_projectRecordAdd");
-    //           this.isNew = true;
-    //         } else {
-    //           this.isNew = false;
-    //         } */
-    //       console.log(params, data);
-    //       // return;
-    //       if (this.$route.query.contractId) {
-    //         // 合同填报
-    //         saveOrUpdateReportByContract(params).then((res) => {
-    //           console.log(params);
-    //           clearInterval(this.timer);
-    //           if (res.msg.code == "0000") {
-    //             this.$message.success("提交成功");
-    //             if (this.isNew == true) {
-    //               this.get_success = true;
-    //             } else {
-    //               this.routeClose();
-
-    //               let path = this.$route.path;
-    //               console.log(path, "路由路径");
-    //               if (path == "/report/reportAdd") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   // query: {
-    //                   //   contractName: this.$route.query.contractName,
-    //                   //   sectionSort: this.$route.query.sectionSort,
-    //                   //   projectId: this.projectId,
-    //                   //   id: this.id,
-    //                   //   systemName: this.systemName,
-    //                   //   projectName: this.projectName,
-    //                   //   pageNum: this.pageNum,
-    //                   // },
-    //                 });
-    //               } else if (path == "/report/reportEdit") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   query: {
-    //                     projectId: this.projectId,
-    //                     id: this.id,
-    //                     systemName: this.systemName,
-    //                     projectName: this.projectName,
-    //                     pageNum: this.pageNum,
-    //                     contractId: this.contractId,
-    //                     contactSPId: this.contactSPId,
-    //                     contractName: this.$route.query.contractName,
-    //                     sectionSort: this.$route.query.sectionSort,
-    //                   },
-    //                 });
-    //               }
-    //             }
-    //           }
-    //         });
-    //       } else {
-    //         querySave(params).then((res) => {
-    //           console.log(params);
-    //           clearInterval(this.timer);
-    //           if (res.msg.code == "0000") {
-    //             this.$message.success("提交成功");
-    //             if (this.isNew == true) {
-    //               this.get_success = true;
-    //             } else {
-    //               this.routeClose();
-
-    //               let path = this.$route.path;
-    //               console.log(path, "路由路径");
-    //               if (path == "/report/reportAdd") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   // query: {
-    //                   //   projectId: this.projectId,
-    //                   //   id: this.id,
-    //                   //   systemName: this.systemName,
-    //                   //   projectName: this.projectName,
-    //                   //   pageNum: this.pageNum,
-    //                   //   contractName: this.$route.query.contractName,
-    //                   //   sectionSort: this.$route.query.sectionSort,
-    //                   // },
-    //                 });
-    //               } else if (path == "/report/reportEdit") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   query: {
-    //                     projectId: this.projectId,
-    //                     id: this.id,
-    //                     systemName: this.systemName,
-    //                     projectName: this.projectName,
-    //                     pageNum: this.pageNum,
-    //                     contractId: this.contractId,
-    //                     contactSPId: this.contactSPId,
-    //                     contractName: this.$route.query.contractName,
-    //                     sectionSort: this.$route.query.sectionSort,
-    //                   },
-    //                 });
-    //               }
-    //             }
-    //           }
-    //         });
-    //       }
-    //       // }
-    //     }
-    //   });
-    // }, 2000),
-
     btg: debounce(function () {
       this.$refs["add"][0].validate((valid) => {
         if (valid) {
@@ -1870,8 +1723,12 @@ export default {
                               sectionSort: this.$route.query.sectionSort,
                               projectId: this.projectId,
                               id: this.id,
-                              ProjectIdNum:this.$route.query.ProjectIdNum?this.$route.query.ProjectIdNum:'',
-                              ContractIdNum:this.$route.query.ContractIdNum?this.$route.query.ContractIdNum:'',
+                              ProjectIdNum: this.$route.query.ProjectIdNum
+                                ? this.$route.query.ProjectIdNum
+                                : "",
+                              ContractIdNum: this.$route.query.ContractIdNum
+                                ? this.$route.query.ContractIdNum
+                                : "",
                               systemName: this.systemName,
                               projectName: this.projectName,
                               pageNum: this.pageNum,
@@ -1883,8 +1740,12 @@ export default {
                             query: {
                               projectId: this.projectId,
                               id: this.id,
-                              ProjectIdNum:this.$route.query.ProjectIdNum?this.$route.query.ProjectIdNum:'',
-                              ContractIdNum:this.$route.query.ContractIdNum?this.$route.query.ContractIdNum:'',
+                              ProjectIdNum: this.$route.query.ProjectIdNum
+                                ? this.$route.query.ProjectIdNum
+                                : "",
+                              ContractIdNum: this.$route.query.ContractIdNum
+                                ? this.$route.query.ContractIdNum
+                                : "",
                               systemName: this.systemName,
                               projectName: this.projectName,
                               pageNum: this.pageNum,
@@ -2096,141 +1957,6 @@ export default {
         }
       });
     }, 2000),
-    // btg: debounce(function () {
-    //   this.$refs["add"][0].validate((valid) => {
-    //     if (valid) {
-    //       let params = {
-    //         ...this.form.data,
-    //       };
-    //       // 其他附件
-    //       (params.weeklyFile =
-    //         Array.isArray(params.weeklyFile) &&
-    //         JSON.stringify(params.weeklyFile)),
-    //         // params.templateId = this.templateId;
-    //         (params.startTime = params.reportPeriodStrat || "");
-    //       // (params.startTime = params.reportPeriod[0] || "");
-    //       // params.endTime = params.reportPeriod[1] || "";
-    //       params.progress = this.form.data.progress;
-    //       params.nextWorkPlan = this.form.data.nextWorkPlan;
-    //       params.startTime = this.reportPeriodStrat;
-    //       params.endTime = this.reportPeriodEnd;
-    //       params.projectId = this.projectId;
-    //       params.isDraft = 0;
-    //       params.problemDto = this.table2.data;
-    //       params.problemId = this.table.data.map((item) => item.id);
-    //       params.sectionSort = this.sectionSort;
-    //       if (this.$route.query.id) {
-    //         params.id = this.$route.query.id;
-    //       } else {
-    //         params.id = "";
-    //       }
-    //       if (this.$route.query.contractName) {
-    //         params.contractName = this.$route.query.contractName;
-    //       }
-    //       // if (this.$route.query.contractName) {
-    //       //   params.contractName = this.$route.query.contractName;
-    //       // }
-    //       if (this.$route.query.contractId) {
-    //         params.contractId = this.$route.query.contractId;
-    //       }
-    //       console.log(params);
-    //       // return;
-    //       if (this.$route.query.contractId) {
-    //         // 合同填报
-    //         saveOrUpdateReportByContract(params).then((res) => {
-    //           console.log(params);
-    //           clearInterval(this.timer);
-    //           if (res.msg.code == "0000") {
-    //             this.$message.success("保存成功");
-    //             if (this.isNew == true) {
-    //               this.get_success = true;
-    //             } else {
-    //               this.routeClose();
-
-    //               let path = this.$route.path;
-    //               console.log(path, "路由路径");
-    //               if (path == "/report/reportAdd") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   // query: {
-    //                   //   contractName: this.$route.query.contractName,
-    //                   //   sectionSort: this.$route.query.sectionSort,
-    //                   //   projectId: this.projectId,
-    //                   //   id: this.id,
-    //                   //   systemName: this.systemName,
-    //                   //   projectName: this.projectName,
-    //                   //   pageNum: this.pageNum,
-    //                   // },
-    //                 });
-    //               } else if (path == "/report/reportEdit") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   query: {
-    //                     projectId: this.projectId,
-    //                     id: this.id,
-    //                     systemName: this.systemName,
-    //                     projectName: this.projectName,
-    //                     pageNum: this.pageNum,
-    //                     contractId: this.contractId,
-    //                     contactSPId: this.contactSPId,
-    //                     contractName: this.$route.query.contractName,
-    //                     sectionSort: this.$route.query.sectionSort,
-    //                   },
-    //                 });
-    //               }
-    //             }
-    //           }
-    //         });
-    //       } else {
-    //         querySave(params).then((res) => {
-    //           console.log(params);
-    //           clearInterval(this.timer);
-    //           if (res.msg.code == "0000") {
-    //             this.$message.success("保存成功");
-    //             if (this.isNew == true) {
-    //               this.get_success = true;
-    //             } else {
-    //               this.routeClose();
-
-    //               let path = this.$route.path;
-    //               console.log(path, "路由路径");
-    //               if (path == "/report/reportAdd") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   // query: {
-    //                   //   contractName: this.$route.query.contractName,
-    //                   //   sectionSort: this.$route.query.sectionSort,
-    //                   //   projectId: this.projectId,
-    //                   //   id: this.id,
-    //                   //   systemName: this.systemName,
-    //                   //   projectName: this.projectName,
-    //                   //   pageNum: this.pageNum,
-    //                   // },
-    //                 });
-    //               } else if (path == "/report/reportEdit") {
-    //                 this.$router.push({
-    //                   name: "reportList",
-    //                   query: {
-    //                     projectId: this.projectId,
-    //                     id: this.id,
-    //                     systemName: this.systemName,
-    //                     projectName: this.projectName,
-    //                     pageNum: this.pageNum,
-    //                     contractId: this.contractId,
-    //                     contactSPId: this.contactSPId,
-    //                     contractName: this.$route.query.contractName,
-    //                     sectionSort: this.$route.query.sectionSort,
-    //                   },
-    //                 });
-    //               }
-    //             }
-    //           }
-    //         });
-    //       }
-    //     }
-    //   });
-    // }, 2000),
-
     fh() {
       let path = this.$route.path;
       console.log(path, "路由路径");
@@ -2687,9 +2413,9 @@ export default {
 }
 
 .container_bottom_btns {
-  position: fixed;
+  // position: fixed;
   bottom: 0;
-  width: calc(100% - 230px);
+  // width: calc(100% - 230px);
   background: #fff;
   z-index: 10;
   right: 0;

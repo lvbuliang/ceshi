@@ -124,7 +124,7 @@
       :page="table.page"
       @selected="selected"
       ref="selectTable"
-      :extra-tooltip-labels="['项目编码', '需求部门']" 
+      :extra-tooltip-labels="['项目编码', '需求部门']"
     >
       <template slot="name3" slot-scope="scope">
         {{ scope.scope.row.constructionProgress }}
@@ -409,7 +409,8 @@ export default {
         this.userInfo.currentRole.roleCode == "F_ZJL" ||
         this.userInfo.currentRole.roleCode == "ZJL" ||
         this.userInfo.currentRole.roleCode == "PSXZ_CY" ||
-        this.userInfo.currentRole.roleCode == "KHJL"
+        this.userInfo.currentRole.roleCode == "KHJL"||
+        this.userInfo.currentRole.roleCode == "XMGLB" 
       ) {
         return true;
       } else {
@@ -677,7 +678,6 @@ export default {
         pageSize: 9999,
       };
       api_getList(param1).then((res1) => {
-        //console.log(res1.data.records, "获取的数据");
         let initTjPerson = new Set(
           res1.data.records.map((item) => {
             return item.tjPerson;
@@ -759,7 +759,7 @@ export default {
           this.table.page.total = res.data.total;
           let { roleCode } = this.userInfo.currentRole;
           let { jfid } = this.userInfo;
-          if (res.data.records.length>0) {
+          if (res.data.records.length > 0) {
             this.isLoading = false;
             res.data.records.forEach((item) => {
               if (item.todo) {
@@ -821,6 +821,7 @@ export default {
             });
             this.table.data = res.data.records;
           } else {
+            this.table.data = res.data.records;
             this.isLoading = false;
             this.noData = true;
           }

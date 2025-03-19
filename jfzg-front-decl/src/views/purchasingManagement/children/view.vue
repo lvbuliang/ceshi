@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <div class="item" v-for="(item, index) in result" :key="index">
-      <div v-if="result.length > 1" class="basic-title">标段{{ index + 1 }}</div>
+      <div v-if="result.length > 1" class="basic-title">
+        标段{{ index + 1 }}
+      </div>
       <div class="sub-item">
         <div class="sub-title">采购管理</div>
         <SrView
@@ -75,7 +77,7 @@
             </el-col>
           </template>
           <template slot="33" slot-scope="scope">
-            <el-col class="value_box">
+            <el-col class="value_box1">
               <label for="" class="itm_label">中标通知书</label>
               <div
                 class="itm_content"
@@ -288,11 +290,26 @@
     </div>
 
     <!-- 底部按钮组 -->
-    <div class="bottom_btns">
+    <!-- <div class="bottom_btns">
       <el-button class="gobackList" size="small" @click="returnList"
         >返回列表</el-button
       >
       <el-button  v-if=isFromWorkBench type='success' size="small" @click="backWorkBench">前往工作台</el-button>
+    </div> -->
+
+    <div class="bottom_btns" :style="{ width: `calc(100% - ${widthB})` }">
+      <el-button class="" size="small" @click="returnList">返回列表</el-button>
+
+      <!-- <el-button class="gobackList" size="small" @click.prevent="returnList"
+        >返回列表</el-button
+      > -->
+      <el-button
+        v-if="isFromWorkBench"
+        type="success"
+        size="small"
+        @click="backWorkBench"
+        >前往工作台</el-button
+      >
     </div>
   </div>
 </template>
@@ -305,7 +322,7 @@ export default {
   name: "purchasingManagement_view",
   data() {
     return {
-      isFromWorkBench: false,//是否从工作台进入
+      isFromWorkBench: false, //是否从工作台进入
       result: [],
       previewRowItem1,
       previewRowItem2,
@@ -314,8 +331,8 @@ export default {
     };
   },
   mounted() {
-    if(this.$route.query.activeName=='已办'){ 
-      this.isFromWorkBench = true
+    if (this.$route.query.activeName == "已办") {
+      this.isFromWorkBench = true;
     }
     this.getDetailById();
     this.initResizeObserver();
@@ -329,8 +346,8 @@ export default {
     },
   },
   methods: {
-    backWorkBench(){
-    this.$router.go(-1)
+    backWorkBench() {
+      this.$router.go(-1);
     },
     initResizeObserver() {
       this.resizeObserver = new ResizeObserver((entries) => {
@@ -564,8 +581,8 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: relative;
-  padding: 20px;
-  height: calc(100% - 70px);
+  padding: 20px 20px 70px 20px;
+  height: calc(100%);
   overflow-y: auto;
 }
 
@@ -638,8 +655,76 @@ export default {
     cursor: pointer;
   }
 }
-
-
+.value_box1 {
+  // height: 44px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  .itm_label {
+    height: 100%;
+    width: 50%;
+    background-color: #f7f7f7;
+    padding: 10px 0 12px 12px;
+    display: flex;
+    align-items: center;
+  }
+  .itm_content {
+    height: 100%;
+    width: 50%;
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+    .file_name {
+      overflow: hidden; //隐藏文字
+      text-overflow: ellipsis; //显示...
+      white-space: nowrap; //不换行
+      flex: 1;
+      height: 100%;
+      line-height: 44px;
+    }
+    .icon-view {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+    .icon-download {
+      width: 30px;
+      height: 100%;
+      line-height: 44px;
+      font-size: 26px;
+      padding-right: 10px;
+    }
+  }
+  .itm_content_contractFile {
+    .files-item-content {
+      display: flex;
+      align-items: center;
+      line-height: 22px;
+      .file_name {
+        overflow: hidden; //隐藏文字
+        text-overflow: ellipsis; //显示...
+        white-space: nowrap; //不换行
+        flex: 1;
+        height: 100%;
+        line-height: 44px;
+      }
+      .icon-view {
+        font-size: 24px;
+        margin-right: 10px;
+      }
+      .icon-download {
+        width: 30px;
+        height: 100%;
+        line-height: 44px;
+        font-size: 26px;
+        padding-right: 10px;
+      }
+    }
+  }
+  .primary {
+    color: #1890ff;
+    cursor: pointer;
+  }
+}
 .sub-item {
   width: 95%;
 }
@@ -653,7 +738,7 @@ export default {
 }
 
 .table-container {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .sub-title {
@@ -672,17 +757,24 @@ export default {
 }
 
 .bottom_btns {
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 220px);
+  border-left: 2px solid rgb(230, 230, 230);
+  background: #fff;
+  z-index: 10;
+  right: 0;
+  padding: 20px 0;
   text-align: center;
+  border-top: 1px solid #e6e6e6;
   .gobackList {
     display: inline-block;
     margin-left: 20px;
   }
-
   .workflow_button {
     box-sizing: border-box;
     display: inline-block;
     margin: 0 4px;
-
     button {
       padding: 0px 24px;
       line-height: 32px;
@@ -690,4 +782,5 @@ export default {
     }
   }
 }
+
 </style>

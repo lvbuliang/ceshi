@@ -734,7 +734,22 @@ export default {
             this.userInfo.jfid === item.proposer ||
             this.userInfo.currentRole.roleCode == "XMFZR"
           ) {
-            return true;
+            // return true;
+            if (
+              [
+                "DSZ",
+                "ZJL",
+                "F_ZJL",
+                "BM_FZR",
+                "PSXZ_CY",
+                "FZGHC_JBRBF",
+                "XMGLB",
+              ].includes(this.userInfo.currentRole.roleCode)
+            ) {
+              return false;
+            } else {
+              return true;
+            }
           }
         }
       } else if (row.name == "处理") {

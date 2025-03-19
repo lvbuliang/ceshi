@@ -494,6 +494,7 @@ export default {
           title: "表格的标题", // 表格标题
           highlightCurrentRow: false, // 控制表格是否单选
           maxHeight: 0,
+          height:0,
           load: this.load,
           tooltipEffect: "light",
           header: [],
@@ -614,13 +615,16 @@ export default {
   },
   mounted() {
     let fromRouter = sessionStorage.getItem("FROMROUTER");
-    this.calculateTableHeight();
+
     this.getTbData();
     this.getTbHeader();
     if (this.$route.fullPath !== "/reportList" && fromRouter != "/") {
       this.title.systemName = this.systemName;
       this.title.projectName = this.projectName;
       this.reportRecordVisiable = true;
+
+      this.title.systemName = sessionStorage.getItem("systemName");
+      this.title.projectName = sessionStorage.getItem("projectName");
       if (this.$route.query.ContractIdNum) {
         //多标段
         this.projectId = "";
@@ -630,7 +634,7 @@ export default {
         //单标段
         this.contractId = "";
         this.projectId = this.$route.query.projectId;
-        this.ProjectIdNum = '项目';
+        this.ProjectIdNum = "项目";
       }
     }
     sessionStorage.setItem("year", this.getNowTime());
@@ -641,7 +645,7 @@ export default {
       // 调用工具函数并传入元素的 ref
       this.$set(
         this.table.tableConfig,
-        "maxHeight",
+        "height",
         getCommonTableHeight(this.$refs.searchRef)
       );
     },
@@ -884,6 +888,7 @@ export default {
               });
               this.isLoading = false;
             });
+          } else {
           }
         })
         .catch((err) => {
@@ -1335,6 +1340,7 @@ export default {
         .then((res) => {
           this.table.page.pages = res.data.pages;
           this.table.page.total = res.data.total;
+          this.calculateTableHeight();
           if (res.data.records.length > 0) {
             this.isLoading = false;
             res.data.records.forEach((item) => {
@@ -1373,7 +1379,7 @@ export default {
             });
             this.table.data = res.data.records;
           } else {
-            this.table.data=[]
+            this.table.data = [];
             this.isLoading = false;
             this.noData = true;
           }
@@ -1444,8 +1450,13 @@ export default {
       this.reportRecordVisiable = true;
       this.typeDelete = "0";
       sessionStorage.setItem("typeDelete", this.typeDelete);
-      this.title.systemName = row.systemName;
-      this.title.projectName = row.projectName;
+
+      sessionStorage.setItem("systemName", row.systemName);
+      sessionStorage.setItem("projectName", row.projectName);
+
+      this.title.systemName = sessionStorage.getItem("systemName");
+      this.title.projectName = sessionStorage.getItem("projectName");
+
       this.isDuobiaoduan = row.hasChildren;
 
       this.isExamine = row.isExamine;
@@ -1501,6 +1512,7 @@ export default {
       sessionStorage.setItem("sectionSort", row.sectionSort);
       sessionStorage.setItem("contactSPId", this.contactSPId);
       // this.sectionSort = row.sectionSort;
+
       if (this.table.page.pageNum !== 1) {
         const { systemName, projectName, contactId } = this.search.formData;
         if (systemName == "" && projectName == "" && contactId == "") {
@@ -1528,8 +1540,8 @@ export default {
       }
     },
     reportRecordClose() {
-      this.ProjectIdNum=''
-      this.ContractIdNum=''
+      this.ProjectIdNum = "";
+      this.ContractIdNum = "";
       this.projectId = "";
       this.contractId = "";
       this.reportRecordVisiable = false;

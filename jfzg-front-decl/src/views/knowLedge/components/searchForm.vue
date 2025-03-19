@@ -181,8 +181,12 @@ export default {
       this.$emit("search", this.search);
     },
     resetForm() {
+      console.log('232');
+      
       // 处理重置表单逻辑
-      this.$refs.searchForm.resetFields();
+      Object.keys(this.search).forEach((key)=>{
+        this.$set(this.search, key, "")
+      })
       this.$emit("reset");
     },
   },

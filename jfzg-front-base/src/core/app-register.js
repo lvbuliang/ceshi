@@ -2,6 +2,7 @@ import {
 	registerMicroApps,
 	runAfterFirstMounted,
 	initGlobalState,
+	start
 } from "qiankun"; //setDefaultMountApp, start,
 import store from "../store";
 /**
@@ -55,36 +56,34 @@ const qianKunStart = (list) => {
 	/**
 	 * @name 处理子应用注册表数据
 	 */
-  const isDev = process.env.NODE_ENV === 'development'
+	const isDev = process.env.NODE_ENV === 'development'
 	const apps = []; // 子应用数组盒子
-  const appMaps = new Map() // 用来判断相同的routerBase不重复放到apps里
+	const appMaps = new Map() // 用来判断相同的routerBase不重复放到apps里
 	// let defaultApp = null; // 默认注册应用路由前缀
 	list.forEach((i) => {
-    if (!isDev && i.entry) {
-      if (i.entry.startsWith('http://') || i.entry.startsWith('https://')) {
-        // 绝对地址，不用改
-      } else {
-        i.entry = config.baseUrl + i.entry
-      }
-    }
+		if (!isDev && i.entry) {
+			if (i.entry.startsWith('http://') || i.entry.startsWith('https://')) {
+				// 绝对地址，不用改
+			} else {
+				i.entry = config.baseUrl + i.entry
+			}
+		}
 		if (!appMaps.has(i.routerBase)) {
 			apps.push({
 				name: i.module,
 				entry: i.entry,
-				container: appContainer, //`#${i.module}`,
+				container: appContainer,
 				activeRule: i.routerBase,
-        props: {
-          // 关键配置：开启严格的样式隔离
-          experimentalStyleIsolation: true 
-        },
 				loader,
 				props: {
 					...props,
 					routes: i.data,
 					routerBase: i.routerBase,
 					store: store,
+					// 将experimentalStyleIsolation配置设为false
+					experimentalStyleIsolation: false
 				},
-			});
+			});;
 			appMaps.set(i.routerBase, i.entry)
 		}
 		// if (i.defaultRegister) defaultApp = i.routerBase;
@@ -95,10 +94,21 @@ const qianKunStart = (list) => {
 	 * @param {Array} list subApps
 	 */
 	registerMicroApps(apps, {
-		beforeLoad: [(app) => {}],
-		beforeMount: [(app) => {}],
-		afterUnmount: [(app) => {}],
+		beforeLoad: [(app) => { }],
+		beforeMount: [(app) => { }],
+		afterMount: [(app) => { }],
+
 	});
+	start({
+		prefetch: false, //关闭预加载
+		// 关键修改：调整样式隔离策略
+		sandbox: {
+			// 修改为false或调整为较宽松的隔离模式
+			experimentalStyleIsolation: false,
+			// 使用严格模式下的样式前缀策略而非Shadow DOM
+			strictStyleIsolation: false
+		}
+	})
 
 	/**
 	 * @name 设置默认进入的子应用
@@ -114,7 +124,7 @@ const qianKunStart = (list) => {
 	/**
 	 * @name 微前端启动进入第一个子应用后回调函数
 	 */
-	runAfterFirstMounted(() => {});
+	runAfterFirstMounted(() => { });
 
 	/**
 	 * @name 启动qiankun应用间通信机制

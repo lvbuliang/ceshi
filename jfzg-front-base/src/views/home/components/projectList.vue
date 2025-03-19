@@ -123,6 +123,13 @@ export default {
               icon: "iconbianji", // 按钮显示的图标,不传显示中文
               validate: this.btnValidate,
             },
+            {
+              name: "查看", // 按钮名称，优先显示icon
+              type: "text",
+              size: "small",
+              method: "chakan", // 点击执行该页面methods中对应的方法
+              icon: "iconbianji", // 按钮显示的图标,不传显示中文
+            },
           ],
         },
         page: {
@@ -236,7 +243,12 @@ export default {
     btnValidate(row, item) {
       if (
         row.name == "编辑" &&
-        this.userInfo.currentRole.roleCode != "CJDW_XMJL"
+        this.userInfo.currentRole.roleCode != "CJDW_XMJL" &&
+        this.userInfo.currentRole.roleCode != "F_ZJL" &&
+        this.userInfo.currentRole.roleCode != "ZJL" &&
+        this.userInfo.currentRole.roleCode != "DSZ"&&
+
+        this.userInfo.currentRole.roleCode != "XMGLB" 
       ) {
         return true;
       }
@@ -449,6 +461,10 @@ export default {
     // 成员管理取消
     closeMemberManage() {
       this.memberManagedialogVisible = false;
+
+      this.$refs.memberManageDialogRef.$destroy();
+      // 移除事件监听器
+      this.$off();
     },
   },
   mounted() {

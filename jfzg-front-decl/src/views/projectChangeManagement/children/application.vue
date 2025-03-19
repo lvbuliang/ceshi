@@ -794,9 +794,9 @@ export default {
 }
 
 .container_bottom_btns {
-  position: fixed;
+  // position: fixed;
   bottom: 0;
-  width: calc(100% - 190px);
+  // width: calc(100% - 190px);
   background: #fff;
   z-index: 10;
   right: 0;

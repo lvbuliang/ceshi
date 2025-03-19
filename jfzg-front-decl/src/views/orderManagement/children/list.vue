@@ -514,7 +514,7 @@ export default {
           ["XMFZR", "FZGHC_JBRBF"].includes(role) &&
           item.creatorJfid === userInfo.jfid,
         查看: (role) =>
-          ["XMFZR", "FZGHC_JBRBF", "DSZ", "ZJL", "F_ZJL"].includes(role),
+          ["XMFZR", "FZGHC_JBRBF", "DSZ", "ZJL", "F_ZJL","XMGLB"].includes(role),
       };
 
       const operation = row.name;
@@ -538,7 +538,7 @@ export default {
       }
       if (row.name == "查看") {
         if (
-          ["XMFZR", "FZGHC_JBRBF", "DSZ", "ZJL", "F_ZJL"].includes(
+          ["XMFZR", "FZGHC_JBRBF", "DSZ", "ZJL", "F_ZJL",'XMGLB'].includes(
             this.roleCode
           )
         ) {

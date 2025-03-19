@@ -113,8 +113,7 @@
       :config="table.tableConfig"
       :page="table.page"
       @sortChange="sortChange"
-      
-      :extra-tooltip-labels="['发起人', '需求部门']" 
+      :extra-tooltip-labels="['发起人', '需求部门']"
     >
     </SrTable>
   </div>
@@ -455,6 +454,7 @@ export default {
           "XMFZR",
           "PSXZ_CY",
           "FZGHC_JBRBF",
+          "XMGLB",
         ].includes(this.userInfo.currentRole.roleCode)
       ) {
         return true;
@@ -586,13 +586,13 @@ export default {
       };
       api_projectCloseLise(param)
         .then((res) => {
-          if (res.data) {
+          if (res.data.records.length > 0) {
             this.isLoading = false;
             this.table.page.pages = res.data.pages;
             this.table.page.total = res.data.total;
             let { roleCode } = this.userInfo.currentRole;
             let { jfid } = this.userInfo;
-            if (res.data.records.length>0) {
+            if (res.data.records.length > 0) {
               res.data.records.forEach((item) => {
                 if (item.todo) {
                   item.operationBtns = [];

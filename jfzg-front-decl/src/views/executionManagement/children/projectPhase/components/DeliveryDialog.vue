@@ -4,6 +4,7 @@
     :visible.sync="dialogVisible"
     width="50%"
     class="deliverable-dialog"
+    :before-close="handleClose"
   >
     <div
       class="deliverable-container"
@@ -32,7 +33,10 @@
               ></i>
             </div>
           </div>
-          <div v-if="previewForm.data.uploadFiles.length === 0" class="no-attachments">
+          <div
+            v-if="previewForm.data.uploadFiles.length === 0"
+            class="no-attachments"
+          >
             <div class="empty-state">
               <i class="el-icon-box empty-icon"></i>
               <p class="empty-text">暂无交付物</p>
@@ -82,7 +86,7 @@ export default {
     Synchronous: Array,
     hasConstructionPermission: Boolean,
   },
-  computed:{
+  computed: {
     hasSynchronous() {
       return this.Synchronous && this.Synchronous.length > 0;
     },
@@ -97,12 +101,14 @@ export default {
     handleDeletePlease(file, index) {
       this.$emit("delete", file, index);
     },
+    handleClose() {
+      this.$emit('close')
+    },
   },
 };
 </script>
 
-<style scoped lang='scss'>
-
+<style scoped lang="scss">
 ::v-deep .sr-big-upload .uploader-btn .btn {
   height: 30px;
   position: relative !important;

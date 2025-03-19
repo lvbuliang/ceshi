@@ -653,7 +653,13 @@ export default {
       let viewScopeList = (item.viewScope || "").split(",");
       return this.hasPermission(
         roleCode,
-        viewScopeList.concat(["FZGHC_JBRBF"])
+        viewScopeList.concat(["FZGHC_JBRBF",
+        "DSZ",
+        "ZJL",
+        "F_ZJL",
+        "BM_FZR",
+      "XMGLB"
+      ])
       );
     },
 
@@ -665,7 +671,8 @@ export default {
         "DSZ",
         "ZJL",
         "F_ZJL",
-        "BM_FZR",
+        "BM_FZR",,
+      "XMGLB"
       ]);
     },
 
@@ -904,46 +911,9 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.table-header {
-  // margin: 15px 0;
-}
-
 ::v-deep .el-table {
-  // table {
   tr {
     height: 60px !important;
   }
-
-  // tr:hover > td {
-  //     background-color: transparent !important;
-  // }
-  //   .el-table__row--striped td {
-  //     background: #ffffff !important;
-  //   }
-  //   tr.current-row > td {
-  //     background: #ffffff !important;
-  //   }
-  //   thead {
-  //     th {
-  //       background: rgba(250, 250, 250, 1);
-  //     }
-  //   }
-  //   th.is-leaf {
-  //     border-bottom: 1px solid rgba(240, 240, 240, 1);
-  //   }
-  //   .el-table--border td {
-  //     border-right: 1px solid rgba(240, 240, 240, 1);
-  //   }
-  //   th > .cell {
-  //     color: rgba(38, 38, 38, 1);
-  //     padding: 0 12px;
-  //   }
-  //   td {
-  //     div {
-  //       color: rgba(89, 89, 89, 1);
-  //     }
-  //   }
-  // }
 }
 </style>

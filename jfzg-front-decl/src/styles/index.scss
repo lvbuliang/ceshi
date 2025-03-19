@@ -20,7 +20,9 @@
 .contentOut{
     height: 100%;
 }
-
+.el-table__body{
+    height: 100%;
+}
 
 ::v-deep html{overflow-y:scroll !important;}
 

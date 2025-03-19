@@ -709,12 +709,15 @@ export default {
     }, 
   },
   created() {
+
     this.tableCopy = JSON.parse(JSON.stringify(this.table[0]));
     this.tableCopy2 = JSON.parse(JSON.stringify(this.table2[0]));
     if (this.contractId) {
+
       this.getSon(this.$route.query.id)
     } else {
       // 详情
+
       this.getReportById(this.$route.query.id);
     }
     // this.getReportById(this.$route.query.id);

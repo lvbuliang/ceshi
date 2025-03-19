@@ -33,7 +33,7 @@
                 <!-- <span style="margin-right: 20px"
                   >标段{{ item.sectionSort}}</span
                 > -->
-                <span style="margin-right: 20px"
+                <!-- <span style="margin-right: 20px"
                   >标段{{ item.sectionSort || index + 1 }}</span
                 >
                 <span
@@ -43,7 +43,7 @@
                 >
                 <span v-if="item.createTime && item.createTime != ''"
                   >填报时间：{{ item.createTime }}</span
-                >
+                > -->
               </div>
               <div>
                 <div v-html="item.progress" class="textClass"></div>
@@ -61,7 +61,7 @@
                 <!-- <span style="margin-right: 20px"
                   >标段{{ (index + 1) }}</span
                 > -->
-                <span style="margin-right: 20px"
+                <!-- <span style="margin-right: 20px"
                   >标段{{ item.sectionSort || index + 1 }}</span
                 >
                 <span
@@ -71,7 +71,7 @@
                 >
                 <span v-if="item.createTime && item.createTime != ''"
                   >填报时间：{{ item.createTime }}</span
-                >
+                > -->
               </div>
               <div>
                 <div v-html="item.nextWorkPlan" class="textClass"></div>
@@ -90,7 +90,7 @@
                 <!-- <span style="margin-right: 20px"
                   >标段{{ (index + 1) }}</span
                 > -->
-                <span style="margin-right: 20px"
+                <!-- <span style="margin-right: 20px"
                   >标段{{ item.data[0].sectionSort || index + 1 }}</span
                 >
                 <span
@@ -100,7 +100,7 @@
                 >
                 <span v-if="item.createTime && item.createTime != ''"
                   >填报时间：{{ item.createTime }}</span
-                >
+                > -->
               </div>
               <SrTable
                 :key="index"
@@ -125,7 +125,7 @@
                 <!-- <span style="margin-right: 20px"
                   >标段{{ (index + 1) }}</span
                 > -->
-                <span style="margin-right: 20px"
+                <!-- <span style="margin-right: 20px"
                   >标段{{ item.data[0].sectionSort || index + 1 }}</span
                 >
                 <span
@@ -135,7 +135,7 @@
                 >
                 <span v-if="item.createTime && item.createTime != ''"
                   >填报时间：{{ item.createTime }}</span
-                >
+                > -->
               </div>
               <SrTable
                 v-if="table2[index].data.length > 0"
@@ -155,13 +155,13 @@
             <template v-for="(item, index) in form.data">
               <div style="display: flex; flex-direction: column">
                 <div
-                  style="margin: 16px 0"
+
                   v-if="isDuobiaoduan && item.weeklyFile.length > 0"
                 >
                   <!-- <span style="margin-right: 20px"
                     >标段{{ (index + 1) }}</span
                   > -->
-                  <span style="margin-right: 20px"
+                  <!-- <span style="margin-right: 20px"
                     >标段{{ item.sectionSort || index + 1 }}</span
                   >
                   <span
@@ -171,7 +171,7 @@
                   >
                   <span v-if="item.createTime && item.createTime != ''"
                     >填报时间：{{ item.createTime }}</span
-                  >
+                  > -->
                 </div>
                 <UploaderView
                   :data-up="item"

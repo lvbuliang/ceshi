@@ -77,13 +77,13 @@
       >
         <!-- 项目负责人 -->
         <template slot="contactId" slot-scope="{ scope }">
-          <span v-if="scope.item.prop == 'contactId'" class="colSpan">
+          <span v-if="scope.item.prop == 'contactId'">
             {{ setContactName(scope.row.contactId) }}
           </span>
         </template>
         <!-- 问题数 -->
         <template slot="problemSumCount" slot-scope="{ scope }">
-          <span v-if="scope.item.prop == 'problemSumCount'" class="colSpan">
+          <span v-if="scope.item.prop == 'problemSumCount'">
             {{
               scope.row.problemSumCount == 0 ? "-" : scope.row.problemSumCount
             }}
@@ -92,7 +92,7 @@
         <!-- 风险数 -->
         <template slot="riskSumCount" slot-scope="{ scope }">
           <template v-if="scope.item.prop == 'riskSumCount'">
-            <span class="colSpan">
+            <span >
               {{ scope.row.riskSumCount == 0 ? "-" : scope.row.riskSumCount }}
             </span>
           </template>
@@ -100,7 +100,7 @@
         <!-- 已解决问题 -->
         <template slot="completeProblem" slot-scope="{ scope }">
           <template v-if="scope.item.prop == 'completeProblem'">
-            <span class="colSpan">
+            <span >
               {{
                 scope.row.completeProblem == 0 ? "-" : scope.row.completeProblem
               }}
@@ -111,7 +111,7 @@
         <!-- 未解决问题数 -->
         <template slot="problemHandle" slot-scope="{ scope }">
           <template v-if="scope.item.prop == 'problemHandle'">
-            <span class="colSpan">
+            <span >
               {{ scope.row.problemHandle == 0 ? "-" : scope.row.problemHandle }}
             </span>
           </template>
@@ -120,7 +120,7 @@
         <!-- 已解决风险 -->
         <template slot="completeRisk" slot-scope="{ scope }">
           <template v-if="scope.item.prop == 'completeRisk'">
-            <span class="colSpan">
+            <span >
               {{ scope.row.completeRisk == 0 ? "-" : scope.row.completeRisk }}
             </span>
           </template>
@@ -129,7 +129,7 @@
         <!-- 未解决风险 -->
         <template slot="riskHandler" slot-scope="{ scope }">
           <template v-if="scope.item.prop == 'riskHandler'">
-            <span class="colSpan">
+            <span>
               {{ scope.row.riskHandler == 0 ? "-" : scope.row.riskHandler }}
             </span>
           </template>
@@ -392,14 +392,14 @@ export default {
     this.init();
   },
   mounted() {
-    this.calculateTableHeight();
+
   },
 
   methods: {
     calculateTableHeight() {
       // 调用工具函数并传入元素的 ref
       let height = getCommonTableHeight(this.$refs.searchRef);
-      this.$set(this.table.tableConfig, "maxHeight", height);
+      this.$set(this.table.tableConfig, "height", height);
     },
     setContactName(val) {
       for (var i = 0; i < this.XMFZRList.length; i++) {
@@ -544,6 +544,8 @@ export default {
               this.isLoading = false;
               this.table.data = res.data.records;
 
+                  this.calculateTableHeight();
+
               this.table.data.forEach((item, index) => {
                 if (item.contractVos && item.contractVos.length > 1) {
                   item.moreVos = 1;
@@ -583,6 +585,9 @@ export default {
             if (res.data) {
               this.table.page.pages = res.data.pages;
               this.table.page.total = res.data.total;
+   
+                  this.calculateTableHeight();
+
               this.isLoading = false;
               if (res.data.total && !valw) {
                 this.getTbDataAll(res.data.total);
@@ -967,40 +972,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-::v-deep .srtable {
-  height: 95% !important;
-  padding: 0 20px;
-}
-
-::v-deep .sr_table th {
-  line-height: 48px;
-  height: 48px;
-
-  > .cell {
-    line-height: 24px !important;
-  }
-}
-
-::v-deep .sr_table td {
-  line-height: 60px;
-  height: 60px;
-
-  > .cell {
-    line-height: 24px !important;
-  }
-}
-
-::v-deep .el-row .el-col-5 {
-  width: 32.83333% !important;
-
-  .exportBtn {
-    margin-bottom: 10px !important;
-  }
-}
-
-::v-deep .el-row .el-col-19 {
-  width: 67.16667% !important;
-}
 
 .SrDialogSelect {
   ::v-deep .el-input {
@@ -1023,28 +994,6 @@ export default {
       margin: 0 20px;
     }
 
-    ::v-deep .selectWidthCustom {
-      width: 153px !important;
-    }
-
-    ::v-deep .rowImgDiv {
-      display: flex;
-      justify-content: center;
-
-      .colSpan {
-        flex-grow: 1;
-        display: flex;
-        // justify-content: center;
-        align-items: center;
-
-        .iconImg {
-          width: 14px;
-          height: 14px;
-          vertical-align: middle;
-          margin-right: 5px;
-        }
-      }
-    }
   }
 }
 
@@ -1091,9 +1040,6 @@ export default {
   }
 }
 
-::v-deep .sr_search .search-btn {
-  padding-bottom: 0 !important;
-}
 
 .systemNameContract {
   display: flex;
@@ -1153,16 +1099,6 @@ export default {
 
 ::v-deep .table-column-hidden .el-checkbox__input {
   display: none !important;
-}
-
-.sr_list {
-  width: 90%;
-  overflow: hidden;
-  /*内容超出后隐藏*/
-  text-overflow: ellipsis;
-  /*超出内容显示为省略号*/
-  white-space: nowrap;
-  /*文本不进行换行*/
 }
 
 .text-ellipsis {

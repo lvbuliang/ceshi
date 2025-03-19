@@ -125,13 +125,10 @@ module.exports = {
             noEmitOnErrors: false // 原本默认为true，设置为false使得构建出错时仍生成部分可用文件，便于排查问题
         }
     },
-    css: {
-        loaderOptions: {
-            sass: {
-                // prependData: `@import "./src/assets/css/variables/variables.scss";`
-            },
-        },
-    },
+// 微应用 vue.config.js
+css: {
+    extract: true, // 提取CSS为单独文件
+  },
     // 5. 新增：生产环境下对资源文件添加哈希值，便于浏览器更好地缓存更新后的文件，避免旧文件缓存导致的问题
     productionSourceMap: false, // 关闭生产环境的source map，减小文件体积，若需要调试可设为true
 

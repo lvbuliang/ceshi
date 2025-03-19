@@ -141,7 +141,7 @@
             <div class="text-ellipsis">{{ scope.row.systemName }}</div>
           </div>
 
-          <div v-else :class="scope.row.isDuobiaoduan ? 'section' : ''">
+          <div v-else :class="scope.row.isDuobiaoduan===0 ? 'section' : ''">
             <span
               v-if="scope.row.isDuobiaoduan === 0"
               style="display: flex; justify-content: center"
@@ -640,7 +640,8 @@ export default {
         this.userInfo.currentRole.roleCode == "ZJL" ||
         this.userInfo.currentRole.roleCode == "CJDW_XMJL" ||
         this.userInfo.currentRole.roleCode == "JLGCS" ||
-        this.userInfo.currentRole.roleCode == "F_ZJL"
+        this.userInfo.currentRole.roleCode == "F_ZJL"||
+        this.userInfo.currentRole.roleCode == "XMGLB" 
       ) {
         // return true;
 

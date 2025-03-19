@@ -681,6 +681,7 @@ export default {
               this.orderFiles.data.otherFile = JSON.parse(
                 res.data.detailVoList[0].otherFile
               );
+              console.log(this.orderFiles.data.otherFile ,'this.orderFiles.data.otherFile ')
             }
           }
         }

@@ -743,7 +743,7 @@ export default {
   padding: 0 20px;
   background: #fff;
   padding-top: 0 !important;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   overflow-x: hidden;
 }
 .el-form {

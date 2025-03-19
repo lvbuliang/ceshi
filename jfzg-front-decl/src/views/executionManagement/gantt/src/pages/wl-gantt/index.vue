@@ -53,25 +53,10 @@
             }}</span>
           </template>
         </el-table-column>
-
-        <!-- this.ganttStartTime != null && this.ganttEndTime != null -->
-
-        <!-- <el-table-column v-if="!ganttOnly" fixed label="任务状态">
-          <template slot-scope="scope">
-            <div class="task-item">
-              <div :class="['task-status', getTaskStatusClass(scope.row)]">
-                {{
-                  scope.row.stageName == null ? getTaskStatus(scope.row) : ""
-                }}
-              </div>
-            </div>
-          </template>
-        </el-table-column> -->
-
         <el-table-column
           v-if="!ganttOnly"
           :width="
-            ganttStartTime === null && ganttEndTime === null ? '120' : null
+            ganttStartTime === null && ganttEndTime === null ? '220' : '100'
           "
           label="任务状态"
           fixed
@@ -101,6 +86,7 @@
             :resizable="false"
             :key="t.id"
             :label="t.name"
+            :min-width="100 / 1.8 + '%'"
           >
             <template slot-scope="scope">
               <div v-if="!t.children">
@@ -166,6 +152,7 @@
           v-for="i in ganttTitleDate"
           :label="i.full_date"
           :key="i.id"
+          :min-width="100 / 6 + '%'"
         >
           <el-table-column
             class-name="wl-gantt-item"
@@ -173,6 +160,7 @@
             :resizable="false"
             :key="t.id"
             :label="t.name"
+            :min-width="100 / 6 + '%'"
           >
             <template slot-scope="scope">
               <div
@@ -184,7 +172,9 @@
 
               <div
                 v-if="useRealTime"
-                :class="realDayGanttTypeDay(scope.row, t.full_date)"
+                :class="
+                  realDayGanttTypeDay(scope.row, t.full_date, t.full_dates)
+                "
                 class="cell-content"
                 @mouseover="showInfo(scope.row, $event, 'practical')"
                 @mouseout="hideInfo"
@@ -792,7 +782,7 @@ export default {
       }
     },
     // 年-周模式gantt标题
-    dayGanttType(row, date, dates, unit = "days") {
+    dayGanttType(row, date, dates, unit = "week") {
       // 先判断当前任务名称是否存在然后判断当前计划开始时间和计划结束时间是否存在返回展示到页面对应的日期上尽量时间对上
       if (row.subTaskName) {
         if (row.planStartTime && row.planEndTime) {
@@ -823,43 +813,80 @@ export default {
       }
     },
 
-    realDayGanttTypeDay(row, date, dates, unit = "days") {
+    realDayGanttTypeDay(row, date, dates, unit = "week") {
+      let index = 1;
+      // actualStartTime
+      console.log(row.actualStartTime, index + 1, "row.actualStartTime");
       // 如果实际开始时间为空，直接返回空字符串
-      if (!row.actualStartTime && row.planStartTime == null) return "";
 
-      // 提取日期范围
-      const start_date = row.actualStartTime;
-      const end_date = row.actualEndTime;
+      if (
+        (!row.actualStartTime && row.planStartTime == null) ||
+        row.actualStartTime == null
+      )
+        return "";
+
+      let start_date = row.actualStartTime ? row.actualStartTime : "";
+      let end_date = row.actualEndTime ? row.actualEndTime : "";
       const end_d = row.planEndTime;
 
       // 新增逻辑：有实际开始时间且无实际结束时间时，仅在开始日期显示绿色圆圈
+      if (start_date && !end_date) {
+        const isStartDate = dayjs(date).isSame(start_date, unit);
+        if (isStartDate) {
+          return "wl-real-start-green";
+        } else {
+          return "";
+        }
+      }
 
-      if (!end_date) {
-        return dayjs(date).isSame(start_date, unit)
-          ? "wl-real-start-green"
-          : "";
+      if (row.actualStartTime && !row.actualEndTime) {
+        const isStartDay = dayjs(row.actualStartTime).isSame(date, unit);
+
+        if (isStartDay) {
+          alert("1");
+          return "wl-real-active-start"; // 新增的绿色圆圈样式
+        }
+        return "";
+      }
+
+      const between = dayjs(date).isBetween(start_date, end_date, unit, "[]");
+
+      let start = dayjs(start_date).isSame(dates, unit);
+      let end = dayjs(end_date).isSame(dates, unit);
+
+      if (between) {
+        return "wl-real-on";
+      }
+      if (start && end) {
+        return "wl-real-on wl-real-full wl-border";
+      }
+      if (start) {
+        return "wl-real-on wl-real-start wl-border";
+      }
+      if (end) {
+        return " wl-real-end wl-border";
       }
 
       // 检查是否在实际开始和结束日期之间
-      const isBetween = dayjs(date).isBetween(start_date, end_date, unit, "[]");
-      // 检查是否是实际开始日期或结束日期
-      const isStart = dayjs(start_date).isSame(dates, unit);
-      const isEnd = dayjs(end_date).isSame(dates, unit);
+      // const isBetween = dayjs(date).isBetween(start_date, end_date, unit, "[]");
+      // // 检查是否是实际开始日期或结束日期
+      // const isStart = dayjs(start_date).isSame(dates, unit);
+      // const isEnd = dayjs(end_date).isSame(dates, unit);
 
-      // 实际结束时间超过计划结束时间的情况
-      if (end_date > end_d) {
-        if (isBetween) return "wl-real-on";
-        if (isStart && isEnd) return "wl-real-on wl-real-full wl-border";
-        if (isStart) return "wl-real-on wl-real-start wl-border";
-        if (isEnd) return " wl-real-end wl-border";
-      } else {
-        // 实际结束日期未超过计划结束日期的情况
-        if (isBetween) return "wl-real-on";
-        // if (isStart && isEnd) return "wl-real-on wl-real-full wl-real-border";
-        // if (isStart) return "wl-real-on wl-real-start wl-real-border";
-        // if (isEnd) return "wl-real-on wl-real-end wl-real-border";
-      }
-      return "";
+      // // 实际结束时间超过计划结束时间的情况
+      // if (end_date > end_d) {
+      //   if (isBetween) return "wl-real-on";
+      //   if (isStart && isEnd) return "wl-real-on wl-real-full wl-border";
+      //   if (isStart) return "wl-real-on wl-real-start wl-border";
+      //   if (isEnd) return " wl-real-end wl-border";
+      // } else {
+      //   // 实际结束日期未超过计划结束日期的情况
+      //   if (isBetween) return "wl-real-on";
+      //   if (isStart && isEnd) return "wl-real-on wl-real-full wl-real-border";
+      //   if (isStart) return "wl-real-on wl-real-start wl-real-border";
+      //   if (isEnd) return "wl-real-on wl-real-end wl-real-border";
+      // }
+      // return "";
     },
     realDayGanttType(row, date, dates, unit = "days") {
       // 如果实际开始时间为空，直接返回空字符串
@@ -923,7 +950,7 @@ export default {
         end_year * 12 + end_mouth - (start_year * 12 + start_mouth);
       if (monthSpan < 6) {
         // 计算新的结束月份
-        let newEndMonth = start_mouth + 6;
+        let newEndMonth = start_mouth + 5;
         end_mouth = newEndMonth % 12 || 12; // 如果是13个月，取1月
         end_year = start_year + Math.floor(newEndMonth / 12);
       }
@@ -1113,14 +1140,14 @@ export default {
         let _day = this.GDay; // 从周日开始
 
         // let _day = 1; // 从1日开始
-        for (let i = _day; i < dates_num; i += 0) {
+        for (let i = _day; i < dates_num; i += 6) {
           // 如果本月有31日那么本月最后一个日子为31日
           if (i == 31) {
             i = 31;
           }
           days.push({
             date: i,
-            name: `${month}-${i}`,
+            name: `${i}`,
             id: uuidv4(),
             full_date: `${year}-${month}-${i}`,
             full_dates: `${year}-${month}-${i++}`,
@@ -1444,13 +1471,14 @@ export default {
 
 .wl-gantt .wl-real-start-green {
   position: absolute;
-  top: 70%;
+  top: 50%;
   left: 0;
-  background-color: rgb(255, 141, 26); /* 绿色背景 */
-  border-radius: 50%; /* 圆形 */
-  width: 10px; /* 宽度 */
-  height: 10px; /* 高度 */
-  display: inline-block; /* 使其可以设置宽高 */
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  z-index: 11111;
 }
 
 .el-table ::-webkit-scrollbar {
@@ -1546,29 +1574,6 @@ th.is-leaf {
   cursor: pointer;
 }
 
-/* 绿色圆圈样式 */
-.wl-real-start-green {
-  position: relative;
-  background-color: rgb(255, 141, 26);
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  border: 2px solid rgb(255, 141, 26);
-}
-
-/* 可选：添加动画效果 */
-.wl-real-start-green::after {
-  // content: "";
-  // position: absolute;
-  // top: -4px;
-  // left: -4px;
-  // right: -4px;
-  // bottom: -4px;
-  // border-radius: 50%;
-  // border: 2px solid  rgb(255, 141, 26);
-  // animation: pulse 1.5s infinite;
-}
-
 @keyframes pulse {
   0% {
     transform: scale(0.8);
@@ -1593,5 +1598,22 @@ th.is-leaf {
   border-radius: 4px;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 绿色圆圈样式 */
+.wl-real-active-start {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: #52c41a;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
 }
 </style>

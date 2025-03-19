@@ -46,7 +46,7 @@
           <sr-trace-track :imgUrl="this.imgUrl" :trackData="trackData">
             <div class="markBttonIcon_box">
               <img
-                src="./../assets/xuanting.png"
+
                 width="40%"
                 height="auto"
                 class="markBttonIcon"

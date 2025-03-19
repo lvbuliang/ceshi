@@ -1236,27 +1236,9 @@ export default {
   border-radius: 50% !important;
 }
 
-::v-deep .sr_table th {
-  line-height: 20px !important;
-  height: 20px !important;
-  > .cell {
-    line-height: 20px !important;
-    button {
-      top: -5px !important;
-    }
-  }
-}
 
-::v-deep .el-dialog .sr_table td {
-  line-height: 25px;
-  height: 25px;
-  > .cell {
-    line-height: 20px !important;
-  }
-}
 
 .text-ellipsis {
-  // width: 200px; /* 定义容器宽度 */
   white-space: nowrap;
   /* 确保文本不换行 */
   overflow: hidden;

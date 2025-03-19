@@ -73,21 +73,16 @@
 
       <!-- 合同名称 contractName -->
       <template slot="contractName" slot-scope="scope">
-        <el-tooltip
-          :content="scope.scope.row.contractName"
-          placement="top-start"
-          effect="light"
+        <div
+          class="table_unitName"
           v-if="
             scope.scope.row.contractName &&
             scope.scope.row.contractName != '' &&
             scope.scope.row.contractName != null
           "
-          class="table_unitName1"
         >
-          <div class="table_unitName">
-            {{ scope.scope.row.contractName }}
-          </div>
-        </el-tooltip>
+          {{ scope.scope.row.contractName }}
+        </div>
 
         <div v-else>/</div>
       </template>
@@ -1216,6 +1211,14 @@ export default {
         this.projectNames = row.projectName;
         this.contractName = row.contractName;
       }
+
+      // const currentProjectStartTime = row.projectByCreateTime;
+      // const v1StartTime = row.projectByCreateTimeV1;
+      // this.ganttStartTime =
+      //   currentProjectStartTime > v1StartTime
+      //     ? v1StartTime
+      //     : currentProjectStartTime;
+
       this.$router.push({
         name: "executionManagementView",
         query: {
@@ -1234,31 +1237,51 @@ export default {
       });
     },
     zxjdu(row) {
+      // projectByCreateTime  开始时间
+      // projectEndTime   结束时间
+      // 判断当前点击的项目的开始时间projectByCreateTime是否大于row.projectByCreateTimeV1的值，如果大于则取row.projectByCreateTimeV1给ganttStartTime
       if (row.contractVos.length == 1 && row.sectionCount == 1) {
         this.testRowId = row.projectId;
-        // this.centerDialogVisible = true;
         this.form.data.constructionProgress = row.constructionProgress;
         this.conID = row.contractVos[0].contractId;
         this.testisSection = row.contractVos[0].isSection;
         this.testsectionSort = row.contractVos[0].sectionSort;
         this.testsectionCount = row.contractVos[0].sectionCount;
-
         this.ganttEndTime = row.ganttEndTime;
         this.ganttStartTime = row.ganttStartTime;
       } else {
         this.testRowId = row.projectId;
-        // this.centerDialogVisible = true;
         this.form.data.constructionProgress = row.constructionProgress;
         this.conID = row.contractId;
         this.testisSection = row.isSection;
         this.testsectionSort = row.sectionSort;
         this.testsectionCount =
           row.contractId == undefined ? "" : row.sectionCount;
-        this.ganttEndTime = row.ganttEndTime;
-        this.ganttStartTime = row.ganttStartTime;
+          // projectByCreateTimeV1
+        // this.ganttEndTime = row.ganttEndTime;
+        // this.ganttStartTime = row.ganttStartTime;
 
-        // sectionSort
+
+        this.ganttEndTime = row.projectByCreateTimeV1;
+        this.ganttStartTime = row.projectEndTimeV1;
       }
+      // const currentProjectStartTime = row.projectByCreateTime;
+      // const v1StartTime = row.projectByCreateTimeV1;
+      // this.ganttStartTime =
+      //   currentProjectStartTime > v1StartTime
+      //     ? v1StartTime
+      //     : currentProjectStartTime;
+
+      // const currentProjectEndtTime = row.ganttEndTime;
+      // const v1EndTime = row.projectEndTimeV1;
+      // this.ganttEndTime =
+      //   currentProjectEndtTime > v1EndTime ? v1EndTime : currentProjectEndtTime;
+
+      // console.log(this.ganttStartTime, "ganttStartTime");
+      // console.log(this.ganttEndTime, "ganttEndTime");
+
+      //       console.log(row.projectByCreateTimeV1,'row.projectByCreateTimeV1')
+      // 在设置 ganttStartTime 前添加逻辑
 
       this.$router.push({
         name: "projectPhase",
@@ -1275,43 +1298,6 @@ export default {
         },
       });
     },
-    lookExamin(row) {
-      if (row.contractVos.length >= 1 && row.sectionCount == 1) {
-        this.testRowId = row.projectId;
-        this.form.data.constructionProgress = row.constructionProgress;
-        this.conID = row.contractVos[0].contractId;
-        this.testisSection = row.contractVos[0].isSection;
-        this.testsectionSort = row.contractVos[0].sectionSort;
-        this.testsectionCount = row.contractVos[0].sectionCount;
-
-        this.ganttEndTime = row.contractVos[0].ganttEndTime;
-        this.ganttStartTime = row.contractVos[0].ganttStartTime;
-        this.projectExecutionId = row.contractVos[0].projectExecutionId;
-      } else {
-        this.testRowId = row.projectId;
-        this.form.data.constructionProgress = row.constructionProgress;
-        this.conID = row.contractId;
-        this.testisSection = row.isSection;
-        this.testsectionSort = row.sectionSort;
-        this.testsectionCount = row.sectionCount;
-        this.ganttEndTime = row.ganttEndTime;
-        this.ganttStartTime = row.ganttStartTime;
-        this.projectExecutionId = row.projectExecutionId;
-      }
-      this.$router.push({
-        name: "LookExadminView",
-        query: {
-          id: row.projectId || "",
-          projectId: row.projectId || "",
-          processId: row.processId || "",
-          status: row.status || "",
-          projectExecutionId: this.projectExecutionId,
-          sectionCount: this.testsectionCount,
-          contractId: this.conID,
-        },
-      });
-    },
-
     // 多选操作
     selected(projectList) {
       this.pilIds = [];
@@ -1416,6 +1402,12 @@ export default {
                   ganttEndTime: ele.ganttEndTime ? ele.ganttEndTime : null,
                   ganttStartTime: ele.ganttStartTime
                     ? ele.ganttStartTime
+                    : null,
+                  projectByCreateTimeV1: ele.projectByCreateTimeV1
+                    ? ele.projectByCreateTimeV1
+                    : null,
+                  projectEndTimeV1: ele.projectEndTimeV1
+                    ? ele.projectEndTimeV1
                     : null,
                 });
               });

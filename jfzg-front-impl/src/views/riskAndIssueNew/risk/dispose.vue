@@ -1,5 +1,5 @@
 <template>
-  <div class="total-page" :style="{ height: boxHeight + 'px' }">
+  <div class="total-page">
     <div class="padd1">
       <el-tabs v-model="activeName">
         <el-tab-pane v-for="item in tabList" :disabled="true" :key="item.code" :name="item.code">

@@ -620,6 +620,7 @@ export default {
           "CJDW_XMJL",
           "JLGCS",
           "FZGHC_JBRBF",
+          "XMGLB"
         ].includes(this.userInfo.currentRole.roleCode)
       ) {
         if (

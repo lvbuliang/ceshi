@@ -6,7 +6,7 @@
       :showTextBtns="true"
       @queryList="queryTableData()"
     ></SrSearch> -->
-    <div class="searchPage"  ref="searchRef">
+    <div class="searchPage" ref="searchRef">
       <el-form
         size="small"
         :inline="true"
@@ -41,7 +41,7 @@
             @blur="inputAntSelectBlur"
           ></el-input>
         </el-form-item>
-       
+
         <el-form-item>
           <el-select
             v-model="search.formData.yearPlanId"
@@ -120,7 +120,7 @@
       @sizeChanged="handleSizeChange"
       :config="table.config"
       :page="table.page"
-      :extra-tooltip-labels="['项目编码', '需求部门']" 
+      :extra-tooltip-labels="['项目编码', '需求部门']"
     >
     </SrTable>
   </div>
@@ -130,14 +130,17 @@
 import store from "@/store";
 import { api_userSetQuery, api_userSetSave } from "@/api/index.js";
 import { getUserByRoleCode } from "@/api/planProject";
-import { api_queryProjectDisclosure, api_before_thxg } from "@/api/projectDisclosure/index.js";
-import { getCommonTableHeight } from '@/utils/tableHeightUtils.js';
-import yearPlanManager from '@/utils/yearPlanUtils';
+import {
+  api_queryProjectDisclosure,
+  api_before_thxg,
+} from "@/api/projectDisclosure/index.js";
+import { getCommonTableHeight } from "@/utils/tableHeightUtils.js";
+import yearPlanManager from "@/utils/yearPlanUtils";
 export default {
   name: "project_disclosure",
   data() {
     return {
-      isLoading:false,
+      isLoading: false,
       noData: false,
       isTableHeaderId: "",
       roleName: "", //当前登录人名称
@@ -207,8 +210,7 @@ export default {
           tjPerson: "",
         },
         enum: {
-          yearPlanList: [
-          ], //年度计划
+          yearPlanList: [], //年度计划
           statusList: [
             {
               value: 0,
@@ -304,8 +306,8 @@ export default {
     let to = sessionStorage.getItem("toPath");
     if (!to.includes("?")) {
       this.table.page.pageNum = 1;
-      this.table.data = [];
       this.table.total = 0;
+      this.table.data = [];
       this.table.page.pageSize = 10;
       Object.keys(this.search.formData).forEach((key) => {
         this.search.formData[key] = "";
@@ -314,22 +316,23 @@ export default {
     }
   },
   created() {
-    this.search.enum.yearPlanList  =yearPlanManager.yearPlanList
+    this.search.enum.yearPlanList = yearPlanManager.yearPlanList;
   },
   mounted() {
-
     this.queryList();
 
     this.getHeaderOptions();
     this.queryTableData();
-    this.calculateTableHeight()
+    this.calculateTableHeight();
   },
   methods: {
     calculateTableHeight() {
       // 调用工具函数并传入元素的 ref
-      this.$set(this.table.config, "maxHeight", getCommonTableHeight(
-        this.$refs.searchRef,
-      ));
+      this.$set(
+        this.table.config,
+        "maxHeight",
+        getCommonTableHeight(this.$refs.searchRef)
+      );
     },
     inputAntSelectBlur() {
       sessionStorage.setItem(
@@ -343,23 +346,23 @@ export default {
     clearFunc(type) {
       sessionStorage.removeItem("searchData");
       switch (type) {
-        case 'systemName':
-        this.search.formData.systemName = "";
+        case "systemName":
+          this.search.formData.systemName = "";
           break;
-          case 'needDepartmentPersonId':
-        this.search.formData.needDepartmentPersonId = "";
+        case "needDepartmentPersonId":
+          this.search.formData.needDepartmentPersonId = "";
           break;
-          case 'yearPlanId':
-        this.search.formData.yearPlanId = "";
+        case "yearPlanId":
+          this.search.formData.yearPlanId = "";
           break;
-          case 'tjPerson':
-        this.search.formData.tjPerson = "";
+        case "tjPerson":
+          this.search.formData.tjPerson = "";
           break;
-          case 'status':
-        this.search.formData.status = null;
+        case "status":
+          this.search.formData.status = null;
           break;
-          case 'projectName':
-        this.search.formData.projectName = "";
+        case "projectName":
+          this.search.formData.projectName = "";
           break;
       }
     },
@@ -369,7 +372,7 @@ export default {
       this.search.formData.projectName = "";
       this.search.formData.systemName = "";
       this.search.formData.status = null;
-      this.search.formData.tjPerson = ''
+      this.search.formData.tjPerson = "";
       this.table.page.pageNum = 1;
       this.table.page.pageSize = 10;
       sessionStorage.removeItem("searchData");
@@ -381,8 +384,22 @@ export default {
     },
     workView(row) {
       if (this.table.page.pageNum !== 1) {
-        const { systemName, projectName, needDepartmentPersonId, yearPlanId, tjPerson, status } = this.search.formData;
-        if (systemName == "" && projectName == "" && needDepartmentPersonId == "" && yearPlanId == '' && tjPerson == '' && status == '') {
+        const {
+          systemName,
+          projectName,
+          needDepartmentPersonId,
+          yearPlanId,
+          tjPerson,
+          status,
+        } = this.search.formData;
+        if (
+          systemName == "" &&
+          projectName == "" &&
+          needDepartmentPersonId == "" &&
+          yearPlanId == "" &&
+          tjPerson == "" &&
+          status == ""
+        ) {
           sessionStorage.setItem(
             "searchData",
             JSON.stringify({
@@ -397,8 +414,22 @@ export default {
           );
         }
       } else {
-        const { systemName, projectName, needDepartmentPersonId, yearPlanId, tjPerson, status } = this.search.formData;
-        if (systemName !== "" || projectName !== "" || needDepartmentPersonId !== "" || yearPlanId !== "" || tjPerson !== "" || status !== '') {
+        const {
+          systemName,
+          projectName,
+          needDepartmentPersonId,
+          yearPlanId,
+          tjPerson,
+          status,
+        } = this.search.formData;
+        if (
+          systemName !== "" ||
+          projectName !== "" ||
+          needDepartmentPersonId !== "" ||
+          yearPlanId !== "" ||
+          tjPerson !== "" ||
+          status !== ""
+        ) {
           sessionStorage.setItem(
             "searchData",
             JSON.stringify({ ...this.search.formData, pageNum: 1 })
@@ -418,8 +449,22 @@ export default {
     },
     projectDisclosure(row) {
       if (this.table.page.pageNum !== 1) {
-        const { systemName, projectName, needDepartmentPersonId, yearPlanId, tjPerson, status } = this.search.formData;
-        if (systemName == "" && projectName == "" && needDepartmentPersonId == "" && yearPlanId == '' && tjPerson == '' && status == '') {
+        const {
+          systemName,
+          projectName,
+          needDepartmentPersonId,
+          yearPlanId,
+          tjPerson,
+          status,
+        } = this.search.formData;
+        if (
+          systemName == "" &&
+          projectName == "" &&
+          needDepartmentPersonId == "" &&
+          yearPlanId == "" &&
+          tjPerson == "" &&
+          status == ""
+        ) {
           sessionStorage.setItem(
             "searchData",
             JSON.stringify({
@@ -434,8 +479,22 @@ export default {
           );
         }
       } else {
-        const { systemName, projectName, needDepartmentPersonId, yearPlanId, tjPerson, status } = this.search.formData;
-        if (systemName !== "" || projectName !== "" || needDepartmentPersonId !== "" || yearPlanId !== "" || tjPerson !== "" || status !== '') {
+        const {
+          systemName,
+          projectName,
+          needDepartmentPersonId,
+          yearPlanId,
+          tjPerson,
+          status,
+        } = this.search.formData;
+        if (
+          systemName !== "" ||
+          projectName !== "" ||
+          needDepartmentPersonId !== "" ||
+          yearPlanId !== "" ||
+          tjPerson !== "" ||
+          status !== ""
+        ) {
           sessionStorage.setItem(
             "searchData",
             JSON.stringify({ ...this.search.formData, pageNum: 1 })
@@ -454,8 +513,22 @@ export default {
     },
     see(row) {
       if (this.table.page.pageNum !== 1) {
-        const { systemName, projectName, needDepartmentPersonId, yearPlanId, tjPerson, status } = this.search.formData;
-        if (systemName == "" && projectName == "" && needDepartmentPersonId == "" && yearPlanId == '' && tjPerson == '' && status == '') {
+        const {
+          systemName,
+          projectName,
+          needDepartmentPersonId,
+          yearPlanId,
+          tjPerson,
+          status,
+        } = this.search.formData;
+        if (
+          systemName == "" &&
+          projectName == "" &&
+          needDepartmentPersonId == "" &&
+          yearPlanId == "" &&
+          tjPerson == "" &&
+          status == ""
+        ) {
           sessionStorage.setItem(
             "searchData",
             JSON.stringify({
@@ -470,8 +543,22 @@ export default {
           );
         }
       } else {
-        const { systemName, projectName, needDepartmentPersonId, yearPlanId, tjPerson, status } = this.search.formData;
-        if (systemName !== "" || projectName !== "" || needDepartmentPersonId !== "" || yearPlanId !== "" || tjPerson !== "" || status !== '') {
+        const {
+          systemName,
+          projectName,
+          needDepartmentPersonId,
+          yearPlanId,
+          tjPerson,
+          status,
+        } = this.search.formData;
+        if (
+          systemName !== "" ||
+          projectName !== "" ||
+          needDepartmentPersonId !== "" ||
+          yearPlanId !== "" ||
+          tjPerson !== "" ||
+          status !== ""
+        ) {
           sessionStorage.setItem(
             "searchData",
             JSON.stringify({ ...this.search.formData, pageNum: 1 })
@@ -512,23 +599,26 @@ export default {
     },
     btnValidate3(row, item) {
       // 客户经理并且状态是2的可以撤回
-      if (item.status == 2 && this.userInfo.currentRole.roleCode == "KHJL" && this.userInfo.fullname == item.tjPerson) {
-          return true;
-        }else {
-          return false;
-        }
+      if (
+        item.status == 2 &&
+        this.userInfo.currentRole.roleCode == "KHJL" &&
+        this.userInfo.fullname == item.tjPerson
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
     // 撤回方法
     beforeExamineThxg(row) {
-      api_before_thxg({ processId: row.processId }).then(res => {
-        if(res.msg.code == '0000') {
-          this.$message.success('撤回成功')
+      api_before_thxg({ processId: row.processId }).then((res) => {
+        if (res.msg.code == "0000") {
+          this.$message.success("撤回成功");
           this.queryTableData();
         } else {
-          this.$message.error(res.data)
+          this.$message.error(res.data);
         }
-        
-      })
+      });
     },
     sortChange(column) {
       if (column.order === "ascending") {
@@ -565,13 +655,11 @@ export default {
           // });
         });
       });
-
-
     },
     // 分页获取表格数据
     async queryTableData(seek) {
-      this.isLoading = true
-      this.noData = false
+      this.isLoading = true;
+      this.noData = false;
       if (sessionStorage.getItem("searchData") !== null) {
         if (
           JSON.parse(sessionStorage.getItem("searchData")).systemName !== ""
@@ -588,13 +676,16 @@ export default {
           ).projectName;
         }
         if (
-          JSON.parse(sessionStorage.getItem("searchData")).needDepartmentPersonId !== ""
+          JSON.parse(sessionStorage.getItem("searchData"))
+            .needDepartmentPersonId !== ""
         ) {
           this.search.formData.needDepartmentPersonId = JSON.parse(
             sessionStorage.getItem("searchData")
           ).needDepartmentPersonId;
         }
-        if (JSON.parse(sessionStorage.getItem("searchData")).yearPlanId !== "") {
+        if (
+          JSON.parse(sessionStorage.getItem("searchData")).yearPlanId !== ""
+        ) {
           this.search.formData.yearPlanId = JSON.parse(
             sessionStorage.getItem("searchData")
           ).yearPlanId;
@@ -604,89 +695,85 @@ export default {
             sessionStorage.getItem("searchData")
           ).tjPerson;
         }
-        if (JSON.parse(sessionStorage.getItem("searchData")).status !== '') {
+        if (JSON.parse(sessionStorage.getItem("searchData")).status !== "") {
           this.search.formData.status = JSON.parse(
             sessionStorage.getItem("searchData")
           ).status;
         }
-        if(seek!='seek'){
-          if (JSON.parse(sessionStorage.getItem("searchData")).pageNum !== '') {
-          this.table.page.pageNum = JSON.parse(
-            sessionStorage.getItem("searchData")
-          ).pageNum;
+        if (seek != "seek") {
+          if (JSON.parse(sessionStorage.getItem("searchData")).pageNum !== "") {
+            this.table.page.pageNum = JSON.parse(
+              sessionStorage.getItem("searchData")
+            ).pageNum;
+          }
         }
-        }
-  
       }
-      //console.log("queryTableData");
-
       let payLoad = {
         pageNum: this.table.page.pageNum,
         pageSize: this.table.page.pageSize,
         ...this.search.formData,
       };
-      // debugger
-      const { data } = await api_queryProjectDisclosure(payLoad);
-      console.log(data,'11111')
-      //console.log("datadatadata", data);
-       if(data&&data.records){
-        this.isLoading = false
-        this.noData = false
-        data.records.forEach((item) => {
-        if (item.todo) {
-          item.operationBtns = [];
-          //按钮筛选  以assignee优先roleCode
-          if (item.assignee == jfid) {
-            item.description &&
-              JSON.parse(item.description).map((item1) => {
-                item1.operationBtns &&
-                  item.operationBtns.push(item1.operationBtns[0]);
-              });
-            item.path = this.workView;
-            //console.log("1.........");
-          } else {
-            //console.log("2...........");
-            item.description &&
-              JSON.parse(item.description).map((item1) => {
-                if (roleCode == item1.role) {
-                  item1.operationBtns &&
-                    item.operationBtns.push(item1.operationBtns[0]);
-                }
-              });
-            // 处理建设单位提交,经办人审核后经办人有撤回按钮
-            item.operationBtns.map((item1) => {
-              if (item1.btnName == "撤回" && item.creator != jfid) {
-                item1.btnName = "";
-              }
-            });
-          }
 
-          item.path = this.workView;
-        }
-        //console.log(item.status);
-        if (item.operationBtns && (item.status == 202 || item.status == 302)) {
-          //console.log("item.operationBtns.before", item.operationBtns);
-          item.operationBtns = item.operationBtns.filter(
-            (item) => item.name == "提交"
-          );
-          //console.log("item.operationBtns.after", item.operationBtns);
-          item.btns = [...(item.btns ?? []), ...(item.operationBtns ?? [])];
-        }
-        return item;
-      });
-      this.table.data = data.records;
-       }else{
-        this.isLoading = false
-        this.noData = true
-       }
-      this.table.page.pages = data.pages;
-      this.table.page.total = data.total;
       let { roleCode } = this.userInfo.currentRole;
       let { jfid } = this.userInfo;
 
+      const { data } = await api_queryProjectDisclosure(payLoad);
+
+      if (data && data.records) {
+        this.isLoading = false;
+        this.noData = false;
+        data.records.forEach((item) => {
+          if (item.todo) {
+            item.operationBtns = [];
+            //按钮筛选  以assignee优先roleCode
+            if (item.assignee == jfid) {
+              item.description &&
+                JSON.parse(item.description).map((item1) => {
+                  item1.operationBtns &&
+                    item.operationBtns.push(item1.operationBtns[0]);
+                });
+              item.path = this.workView;
+              //console.log("1.........");
+            } else {
+              //console.log("2...........");
+              item.description &&
+                JSON.parse(item.description).map((item1) => {
+                  if (roleCode == item1.role) {
+                    item1.operationBtns &&
+                      item.operationBtns.push(item1.operationBtns[0]);
+                  }
+                });
+              // 处理建设单位提交,经办人审核后经办人有撤回按钮
+              item.operationBtns.map((item1) => {
+                if (item1.btnName == "撤回" && item.creator != jfid) {
+                  item1.btnName = "";
+                }
+              });
+            }
+            item.path = this.workView;
+          }
+          if (
+            item.operationBtns &&
+            (item.status == 202 || item.status == 302)
+          ) {
+            item.operationBtns = item.operationBtns.filter(
+              (item) => item.name == "提交"
+            );
+            item.btns = [...(item.btns ?? []), ...(item.operationBtns ?? [])];
+          }
+          return item;
+        });
+        this.table.data = data.records;
+      } else {
+        this.table.data = [];
+        this.isLoading = false;
+        this.noData = true;
+      }
+      this.table.page.pages = data.pages;
+      this.table.page.total = data.total;
     },
 
-    queryList(){
+    queryList() {
       let param1 = {
         pageNum: this.table.page.pageNum,
         pageSize: 9999,
@@ -694,7 +781,7 @@ export default {
       api_queryProjectDisclosure(param1).then((res1) => {
         console.log(res1.data.records, "获取的数据");
         let initTjPerson = new Set(
-          res1.data.records.map((item) => {
+          res1.data&&res1.data.records.map((item) => {
             return item.tjPerson;
           })
         );
@@ -729,12 +816,12 @@ export default {
       this.$refs[ref].init();
     },
     handlePageChange(pageNum) {
-      sessionStorage.removeItem('searchData')
+      sessionStorage.removeItem("searchData");
       this.table.page.pageNum = pageNum;
       this.queryTableData();
     },
     handleSizeChange(pageSize) {
-      sessionStorage.removeItem('searchData')
+      sessionStorage.removeItem("searchData");
       this.table.page.pageSize = pageSize;
       this.queryTableData();
     },

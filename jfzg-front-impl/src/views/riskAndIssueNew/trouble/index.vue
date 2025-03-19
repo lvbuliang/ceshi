@@ -699,11 +699,27 @@ export default {
     btnValidate(row, item) {
       if (row.name == "编辑") {
         if (item.status != "2") {
+          console.log(item.proposer, "item.proposer");
           if (
             this.userInfo.jfid === item.proposer ||
             this.userInfo.currentRole.roleCode == "XMFZR"
           ) {
-            return true;
+            if (
+              [
+                "DSZ",
+                "ZJL",
+                "F_ZJL",
+                "BM_FZR",
+                "PSXZ_CY",
+                "FZGHC_JBRBF",
+                "XMGLB",
+              ].includes(this.userInfo.currentRole.roleCode)
+            ) {
+              return false;
+            } else {
+              return true;
+            }
+            // return true;
           }
         }
         // }

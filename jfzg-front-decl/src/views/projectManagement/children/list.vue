@@ -443,6 +443,7 @@ export default {
           "CGJL",
           "FZGHC_JBRBF",
           "PSXZ_CY",
+          "XMGLB"
         ].includes(this.userInfo.currentRole.roleCode)
       ) {
         return true;

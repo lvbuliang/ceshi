@@ -1129,7 +1129,9 @@ export default {
         this.userInfo.currentRole.roleCode != "CJDW_XMJL" &&
         this.userInfo.currentRole.roleCode != "F_ZJL" &&
         this.userInfo.currentRole.roleCode != "ZJL" &&
-        this.userInfo.currentRole.roleCode != "DSZ"
+        this.userInfo.currentRole.roleCode != "DSZ"&&
+
+        this.userInfo.currentRole.roleCode != "XMGLB" 
       ) {
         return true;
       }
@@ -1586,6 +1588,9 @@ export default {
     // 成员管理取消
     closeMemberManage() {
       this.memberManagedialogVisible = false;
+       this.$refs.memberManageDialogRef.$destroy();
+      // 移除事件监听器
+      this.$off();
     },
     // 成员管理保存
     saveMemberManage(val) {

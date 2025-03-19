@@ -648,7 +648,8 @@ export default {
         this.userInfo.currentRole.roleCode == "CJDW_XMJL" ||
         this.userInfo.currentRole.roleCode == "JLGCS" ||
         this.userInfo.currentRole.roleCode == "PSXZ_CY" ||
-        this.userInfo.currentRole.roleCode == "ZJL"
+        this.userInfo.currentRole.roleCode == "ZJL"||
+        this.userInfo.currentRole.roleCode == "XMGLB" 
       ) {
         // return true;
         if (

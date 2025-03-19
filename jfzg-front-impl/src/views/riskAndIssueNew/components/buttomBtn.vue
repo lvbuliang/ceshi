@@ -94,15 +94,14 @@ export default {
 
 
 #container_bottom_btns {
-  position: fixed;
+  // position: fixed;
   bottom: 0;
-  width: calc(100% - 230px);
+  // width: calc(100% - 230px);
   background: #fff;
   z-index: 10;
   right: 0;
   padding: 20px 0;
   text-align: center;
-  border-top: 1px solid #e6e6e6;
 
   .goBackCss {
     display: inline-block;

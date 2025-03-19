@@ -1,57 +1,24 @@
 <template>
   <div class="searchPage" ref="searchForm">
-    <el-form
-      size="small"
-      :inline="true"
-      :model="formData"
-      class="demo-form-inline"
-      ref="searchForm1"
-    >
+    <el-form size="small" :inline="true" :model="formData" class="demo-form-inline" ref="searchForm1">
       <el-form-item v-for="item in formItems" :key="item.prop">
         <!-- {{ [item] }} -->
-        <el-input
-          v-if="item.type === 'input'"
-          :placeholder="item.label"
-          v-model="formData[item.prop]"
-          clearable
-          @clear="clearFunc(item.prop)"
-          @blur="inputAntSelectBlur"
-        ></el-input>
+        <el-input v-if="item.type === 'input'" :placeholder="item.label" v-model="formData[item.prop]" clearable
+          @clear="clearFunc(item.prop)" @blur="inputAntSelectBlur"></el-input>
 
-        <el-select
-          v-else-if="item.type === 'select'"
-          v-model="formData[item.prop]"
-          :placeholder="item.label"
-          clearable
-          @clear="clearFunc(item.prop)"
-          @change="inputAntSelectBlur"
-        >
-          <el-option
-            v-for="option in item.options"
-            :key="option.value"
-            :label="option.label"
-            :value="option.value"
-          ></el-option>
+        <el-select v-else-if="item.type === 'select'" v-model="formData[item.prop]" :placeholder="item.label" clearable
+          @clear="clearFunc(item.prop)" @change="inputAntSelectBlur">
+          <el-option v-for="option in item.options" :key="option.value" :label="option.label"
+            :value="option.value"></el-option>
         </el-select>
       </el-form-item>
 
       <el-form-item>
-        <el-button
-          class="circle-btn"
-          icon="el-icon-search"
-          type="primary"
-          circle
-          @click="handleSearch"
-        ></el-button>
+        <el-button class="circle-btn" icon="el-icon-search" type="primary" circle @click="handleSearch"></el-button>
       </el-form-item>
 
       <el-form-item>
-        <el-button
-          class="circle-btn"
-          icon="el-icon-refresh"
-          circle
-          @click="handleReset"
-        ></el-button>
+        <el-button class="circle-btn" icon="el-icon-refresh" circle @click="handleReset"></el-button>
       </el-form-item>
     </el-form>
 
@@ -102,7 +69,9 @@ export default {
       this.$emit("search");
     },
     handleReset() {
-      this.$refs.searchForm1.resetFields();
+      Object.keys(this.formData).forEach((key) => {
+        this.$set(this.formData, key, "")
+      })
       this.$emit("reset");
     },
   },
@@ -113,6 +82,7 @@ export default {
 .searchPage {
   height: 100%;
   margin-bottom: 20px;
+
   .demo-form-inline {
     width: 100%;
   }
